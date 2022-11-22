@@ -50,6 +50,12 @@ public:
     // Contrat :
     //
 
+    Trajet (const char* depart, const char* arrivee );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
     Trajet ( );
     // Mode d'emploi :
     //

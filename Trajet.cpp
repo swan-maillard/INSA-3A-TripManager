@@ -38,23 +38,38 @@ Trajet & Trajet::operator = ( const Trajet & unTrajet )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Trajet::Trajet ( const Trajet & unTrajet )
+Trajet ::Trajet( const Trajet & unTrajet )
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Trajet>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au constructeur de copie de <Trajet>" << endl;
+  #endif
+
+  depart=unTrajet.depart;
+  arrivee=unTrajet.arrivee;
 } //----- Fin de Trajet (constructeur de copie)
 
+Trajet::Trajet (const char* villedepart, const char* villearrivee )
+// Algorithme :
+//
+{
+  #ifdef MAP
+      cout << "Appel au constructeur de <Trajet>" << endl;
+  #endif
+  this->depart=new char[strlen(villedepart)+1];
+  this->arrivee=new char[strlen(villedepart)+1];
+  strcpy(depart,villedepart);
+  strcpy(arrivee,villearrivee);
 
+}
 Trajet::Trajet ( )
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Trajet>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au constructeur de <Trajet>" << endl;
+  #endif
 } //----- Fin de Trajet
 
 
@@ -65,6 +80,9 @@ Trajet::~Trajet ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Trajet>" << endl;
 #endif
+
+  delete[] depart;
+  delete[] arrivee;
 } //----- Fin de ~Trajet
 
 
