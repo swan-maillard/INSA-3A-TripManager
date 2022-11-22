@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Trajetsimple  -  description
+                           Trajetcompose  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Trajetsimple> (fichier Trajetsimple.h) ----------------
-#if ! defined ( Trajetsimple_H )
-#define TRAJETSIMPLE_H
+//---------- Interface de la classe <Trajetcompose> (fichier Trajetcompose.h) ----------------
+#if ! defined ( Trajetcompose_H )
+#define TRAJETCOMPOSE_H
 #include "Trajet.h"
 
 //--------------------------------------------------- Interfaces utilisées
@@ -18,12 +18,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Trajetsimple>
+// Rôle de la classe <Trajetcompose>
 //
 //
 //------------------------------------------------------------------------
 
-class Trajetsimple:public Trajet
+class Trajetcompose:public Trajet
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -35,30 +35,24 @@ public:
     // Contrat :
     //
     virtual void Afficher() const;
-    char* getTransport() const;
-
-
+    int getNbTrajets() const;
 
 //-------------------------------------------- Constructeurs - destructeur
+    Trajetcompose (const char* depart, const char* arrivee, int nbtrajets);
 
-
-    Trajetsimple (const char* depart, const char* arrivee, char* letransport);
-
-    virtual ~Trajetsimple ( );
+    virtual ~Trajetcompose ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
-
 //------------------------------------------------------------------ PRIVE
-
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-char* transport;
+int nbtrajets;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Trajetsimple>
+//-------------------------------- Autres définitions dépendantes de <Trajetcompose>
 
-#endif // Trajetsimple_H
+#endif // Trajetcompose_H
