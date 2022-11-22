@@ -35,6 +35,8 @@ public:
     // Contrat :
     //
     virtual void Afficher() const;
+    virtual char* getTransport() const;
+
 
 
 //-------------------------------------------- Constructeurs - destructeur

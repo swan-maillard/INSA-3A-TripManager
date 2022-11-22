@@ -32,13 +32,16 @@ using namespace std;
 //} //----- Fin de Méthode
 void  Trajetsimple::Afficher() const {
   Trajet::Afficher();
-  
+
   cout << " en ";
   for (int i=0;i<strlen(transport);i++){
     cout << transport[i];
   }
   cout << endl;
+}
 
+char* Trajetsimple::getTransport() const{
+  return transport;
 }
 
 //-------------------------------------------- Constructeurs - destructeur

@@ -12,9 +12,11 @@ int main() {
   char transport[]="MT1";
 
   Trajetsimple t(ville1, ville2, transport);
-  
+
   t.Afficher();
 
+  char* gettest=t.getTransport();
+  cout<<gettest;
   return 0;
 }
 

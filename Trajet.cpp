@@ -39,6 +39,15 @@ void Trajet::Afficher() const {
   }
 }
 
+char* Trajet::getStart() const{
+  return depart;
+}
+
+char* Trajet::getEnd() const{
+  return arrivee;
+}
+
+
 //-------------------------------------------- Constructeurs - destructeur
 
 

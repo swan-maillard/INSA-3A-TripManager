@@ -34,7 +34,9 @@ public:
     // Contrat :
     //
     virtual void Afficher() const;
-    
+    virtual char* getStart() const;
+    virtual char* getEnd() const;
+
     Trajet (const char* depart, const char* arrivee );
     // Mode d'emploi :
     //
