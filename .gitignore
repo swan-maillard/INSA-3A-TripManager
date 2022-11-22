@@ -4,3 +4,5 @@ main
 main.o
 Trajet.o
 Trajetsimple.o
+ElementListe.o
+ListeTrajets.o
