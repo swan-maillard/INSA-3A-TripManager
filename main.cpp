@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "Trajet.h"
+#include "Trajetsimple.h"
 
 
 int main() {

@@ -37,15 +37,14 @@ using namespace std;
 //-------------------------------------------- Constructeurs - destructeur
 
 Trajetsimple::Trajetsimple ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Trajetsimple>" << endl;
 #endif
 } //----- Fin de Trajetsimple
 
-Trajetsimple ( char* depart,  char* arrivee,  char* letransport)
+Trajetsimple::Trajetsimple(char* depart,  char* arrivee,  char* letransport)
+: Trajet(depart,arrivee), transport(letransport)
 {
 
 }

@@ -36,20 +36,7 @@ public:
     //
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Trajetsimple & operator = ( const Trajetsimple & unTrajetsimple );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
-    Trajetsimple ( const Trajetsimple & unTrajetsimple );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     Trajetsimple ( );
     // Mode d'emploi :
@@ -57,11 +44,7 @@ public:
     // Contrat :
     //
 
-      Trajetsimple ( char* depart,  char* arrivee,  char* letransport)
-      : Trajet(depart,arrivee), transport(letransport)
-        {
-
-        }
+    Trajetsimple (char* depart,  char* arrivee,  char* letransport);
 
     virtual ~Trajetsimple ( );
     // Mode d'emploi :
