@@ -55,7 +55,7 @@ public:
     //
     // Contrat :
     //
-    
+
     Trajet ( );
     // Mode d'emploi :
     //
@@ -74,7 +74,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+char* depart;
+char* arrivee;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajet>
