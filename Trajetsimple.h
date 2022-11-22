@@ -34,6 +34,7 @@ public:
     //
     // Contrat :
     //
+    virtual void Afficher() const;
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -44,7 +45,7 @@ public:
     // Contrat :
     //
 
-    Trajetsimple (char* depart,  char* arrivee,  char* letransport);
+    Trajetsimple (const char* depart, const char* arrivee, char* letransport);
 
     virtual ~Trajetsimple ( );
     // Mode d'emploi :

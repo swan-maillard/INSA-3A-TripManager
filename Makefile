@@ -1,8 +1,8 @@
-main: main.o Trajet.o
+main: main.o Trajet.o Trajetsimple.o
 	g++ -o main main.o Trajet.o Trajetsimple.o
 
 main.o: main.cpp
-	g++ -c -g main.cpp
+	g++ -c -g -DMAP main.cpp
 
 Trajet.o: Trajet.cpp
 	g++ -c -g -DMAP Trajet.cpp

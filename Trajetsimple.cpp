@@ -30,7 +30,13 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+void  Trajetsimple::Afficher() const{
+  cout << "en";
+  for (int i=0;i<strlen(transport);i++){
+    cout << transport[i];
+  }
 
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -43,7 +49,7 @@ Trajetsimple::Trajetsimple ( )
 #endif
 } //----- Fin de Trajetsimple
 
-Trajetsimple::Trajetsimple(char* depart,  char* arrivee,  char* letransport)
+Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, char* letransport)
 : Trajet(depart,arrivee), transport(letransport)
 {
 
