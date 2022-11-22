@@ -4,3 +4,4 @@ main
 main.o
 Trajet.o
 Trajetsimple.o
+Trajetcompose.o
