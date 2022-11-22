@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Trajetcompose  -  description
+                           Catalogue  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Trajetcompose> (fichier Trajetcompose.cpp) ------------
+//---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -16,60 +16,44 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-
-#include "Trajetcompose.h"
-#include "ListeTrajets.h"
-
+#include "Catalogue.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Trajetcompose::Méthode ( liste des paramètres )
+// type Catalogue::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
-void  Trajetcompose::Afficher() const {
-  Trajet::Afficher();
 
-  cout << " en ";
 
-}
 
-int Trajetcompose::getNbTrajets() const{
-  #ifdef MAP
-      cout << "Appel au Get NbTrajets du Trajet" << endl;
-  #endif
-  return nbtrajets;
-}
-
-ListeTrajets Trajetcompose::getTrajets() const{
-  #ifdef MAP
-      cout << "Appel au Get NbTrajets du Trajet" << endl;
-  #endif
-  return trajets;
-}
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Trajetcompose::Trajetcompose(const char* depart, const char* arrivee, ListeTrajets lestrajets,int lenbtrajets)
-: Trajet(depart,arrivee), nbtrajets(lenbtrajets)
+Catalogue::Catalogue ()
+// Algorithme :
+//
 {
   #ifdef MAP
-      cout << "Appel au constructeur de <Trajetcompose>" << endl;
+      cout << "Appel au constructeur de <Catalogue>" << endl;
   #endif
+
 }
 
-Trajetcompose::~Trajetcompose ( )
+
+Catalogue::~Catalogue ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Trajetcompose>" << endl;
+    cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
-} //----- Fin de ~Trajetcompose
+
+} //----- Fin de ~Catalogue
 
 
 //------------------------------------------------------------------ PRIVE

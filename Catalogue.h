@@ -1,17 +1,14 @@
 /*************************************************************************
-                           Trajetcompose  -  description
+                           Catalogue  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Trajetcompose> (fichier Trajetcompose.h) ----------------
-#if ! defined ( Trajetcompose_H )
-#define TRAJETCOMPOSE_H
-#include "Trajet.h"
-#include "ListeTrajets.h"
-
+//---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------------
+#if ! defined ( CATALOGUE_H )
+#define CATALOGUE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -20,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Trajetcompose>
+// Rôle de la classe <Catalogue>
 //
 //
 //------------------------------------------------------------------------
 
-class Trajetcompose:public Trajet
+class Catalogue
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -36,28 +33,27 @@ public:
     //
     // Contrat :
     //
-    virtual void Afficher() const;
-    int getNbTrajets() const;
-    ListeTrajets getTrajets() const;
 
 
-//-------------------------------------------- Constructeurs - destructeur
-    Trajetcompose (const char* depart, const char* arrivee, ListeTrajets lestrajets,int nbtrajets); //a modifier pour enlever départ et arrivée (mais ça faisait des pb)
-
-    virtual ~Trajetcompose ( );
+    Catalogue ();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    virtual ~Catalogue ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
+
 //------------------------------------------------------------------ PRIVE
+
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-ListeTrajets trajets;
-int nbtrajets;
+int nbTrajets;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Trajetcompose>
+//-------------------------------- Autres définitions dépendantes de <Catalogue>
 
-#endif // Trajetcompose_H
+#endif // CATALOGUE_H
