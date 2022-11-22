@@ -40,6 +40,15 @@ ElementListe::ElementListe (Trajet & trajet) {
 
 }
 
+void ElementListe::AddNext(ElementListe * element) {
+  #ifdef MAP
+      cout << "Appel au AddNext de <ElementListe>" << endl;
+  #endif
+
+  element->next = this->next;
+  this->next = element;
+}
+
 Trajet* ElementListe::getTrajet() const {
   #ifdef MAP
       cout << "Appel au getTrajet de <ElementListe>" << endl;

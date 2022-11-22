@@ -49,7 +49,45 @@ ListeTrajets::~ListeTrajets ( )
 #ifdef MAP
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
 #endif
+
+  delete start;
+  delete end;
 } //----- Fin de ~ListeTrajets
+
+void ListeTrajets::AddTrajet(Trajet & trajet) {
+  #ifdef MAP
+      cout << "Appel au AddTrajet de <ListeTrajets>" << endl;
+  #endif
+
+  size++;
+  ElementListe * lastTrajet = end;
+  end = new ElementListe(trajet);
+  lastTrajet->AddNext(end);
+}
+
+ElementListe * ListeTrajets::GetStart() {
+  #ifdef MAP
+      cout << "Appel au GetStart de <ListeTrajets>" << endl;
+  #endif
+
+  return start;
+}
+
+ElementListe * ListeTrajets::GetEnd() {
+  #ifdef MAP
+      cout << "Appel au GetEnd de <ListeTrajets>" << endl;
+  #endif
+
+  return end;
+}
+
+int ListeTrajets::GetSize() {
+  #ifdef MAP
+      cout << "Appel au GetSize de <ListeTrajets>" << endl;
+  #endif
+
+  return size;
+}
 
 
 //------------------------------------------------------------------ PRIVE

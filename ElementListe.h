@@ -44,6 +44,8 @@ public:
     // Contrat :
     //
 
+    void AddNext(ElementListe * element);
+
     Trajet* getTrajet() const;
     ElementListe* getNext() const;
 

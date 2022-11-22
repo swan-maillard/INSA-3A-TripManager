@@ -45,6 +45,14 @@ public:
     // Contrat :
     //
 
+    void AddTrajet(Trajet & trajet);
+
+    ElementListe * GetStart();
+
+    ElementListe * GetEnd();
+
+    int GetSize();
+
 //------------------------------------------------------------------ PRIVE
 
 protected:

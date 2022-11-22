@@ -3,6 +3,7 @@ using namespace std;
 
 #include "Trajet.h"
 #include "Trajetsimple.h"
+#include "ListeTrajets.h"
 
 
 int main() {
@@ -13,15 +14,18 @@ int main() {
   int nbtrajet=1;
 
   Trajetsimple t(ville1, ville2, transport);
+  Trajet trajet(ville1, ville2);
 
   t.Afficher();
 
+  ListeTrajets list;
+
+  list.AddTrajet(trajet);
+
+  cout << list.GetSize() << endl;
+
+
   char* gettest=t.getTransport();
-  cout<<gettest;
+  cout<<gettest << endl;
   return 0;
 }
-
-
-// Trajet (depart, arrivée)
-//  -> TrajetSimple (transport)
-//  -> TrajetComposé (nbTrajets, listeTrajets[TrajetSimple])
