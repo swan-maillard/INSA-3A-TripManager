@@ -41,6 +41,9 @@ void  Trajetsimple::Afficher() const {
 }
 
 char* Trajetsimple::getTransport() const{
+  #ifdef MAP
+      cout << "Appel au Get Transport du Trajet" << endl;
+  #endif
   return transport;
 }
 

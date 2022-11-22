@@ -40,10 +40,16 @@ void Trajet::Afficher() const {
 }
 
 char* Trajet::getStart() const{
+  #ifdef MAP
+      cout << "Appel au Get Start du Trajet" << endl;
+  #endif
   return depart;
 }
 
 char* Trajet::getEnd() const{
+  #ifdef MAP
+      cout << "Appel au Get End du Trajet" << endl;
+  #endif
   return arrivee;
 }
 
