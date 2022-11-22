@@ -39,11 +39,6 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Trajetsimple ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     Trajetsimple (const char* depart, const char* arrivee, char* letransport);
 

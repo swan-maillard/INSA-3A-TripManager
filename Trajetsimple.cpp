@@ -30,29 +30,26 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-void  Trajetsimple::Afficher() const{
-  cout << "en";
+void  Trajetsimple::Afficher() const {
+  Trajet::Afficher();
+  
+  cout << " en ";
   for (int i=0;i<strlen(transport);i++){
     cout << transport[i];
   }
+  cout << endl;
 
 }
 
-//------------------------------------------------- Surcharge d'opérateurs
-
 //-------------------------------------------- Constructeurs - destructeur
 
-Trajetsimple::Trajetsimple ( )
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Trajetsimple>" << endl;
-#endif
-} //----- Fin de Trajetsimple
 
 Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, char* letransport)
 : Trajet(depart,arrivee), transport(letransport)
 {
-
+  #ifdef MAP
+      cout << "Appel au constructeur de <Trajetsimple>" << endl;
+  #endif
 }
 
 Trajetsimple::~Trajetsimple ( )

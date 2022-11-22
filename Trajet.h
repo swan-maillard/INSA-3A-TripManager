@@ -34,26 +34,11 @@ public:
     // Contrat :
     //
     virtual void Afficher() const;
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-
-
-//-------------------------------------------- Constructeurs - destructeur
-
-
+    
     Trajet (const char* depart, const char* arrivee );
     // Mode d'emploi :
     //
     // Contrat :
-    //
-
-    Trajet ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
     virtual ~Trajet ( );
     // Mode d'emploi :
     //

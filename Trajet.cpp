@@ -29,9 +29,15 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-
+void Trajet::Afficher() const {
+  for (int i=0;i<strlen(depart);i++){
+    cout << depart[i];
+  }
+  cout << " à ";
+  for (int i=0;i<strlen(arrivee);i++){
+    cout << arrivee[i];
+  }
+}
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -49,14 +55,6 @@ Trajet::Trajet (const char* villedepart, const char* villearrivee )
   strcpy(arrivee,villearrivee);
 
 }
-Trajet::Trajet ( )
-// Algorithme :
-//
-{
-  #ifdef MAP
-      cout << "Appel au constructeur de <Trajet>" << endl;
-  #endif
-} //----- Fin de Trajet
 
 
 Trajet::~Trajet ( )
