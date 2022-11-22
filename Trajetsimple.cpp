@@ -16,7 +16,9 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
+
 #include "Trajetsimple.h"
+
 
 //------------------------------------------------------------- Constantes
 
@@ -31,23 +33,8 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Trajetsimple & Trajetsimple::operator = ( const Trajetsimple & unTrajetsimple )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
-Trajetsimple::Trajetsimple ( const Trajetsimple & unTrajetsimple )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Trajetsimple>" << endl;
-#endif
-} //----- Fin de Trajetsimple (constructeur de copie)
-
 
 Trajetsimple::Trajetsimple ( )
 // Algorithme :
@@ -58,6 +45,10 @@ Trajetsimple::Trajetsimple ( )
 #endif
 } //----- Fin de Trajetsimple
 
+Trajetsimple ( char* depart,  char* arrivee,  char* letransport)
+{
+
+}
 
 Trajetsimple::~Trajetsimple ( )
 // Algorithme :
