@@ -34,7 +34,6 @@ Trajet & Trajet::operator = ( const Trajet & unTrajet )
 // Algorithme :
 //
 {
-
 } //----- Fin de operator =
 
 
