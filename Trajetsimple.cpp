@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Trajet  -  description
+                           Trajetsimple  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Trajet> (fichier Trajet.cpp) ------------
+//---------- Réalisation de la classe <Trajetsimple> (fichier Trajetsimple.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -16,14 +16,14 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Trajet.h"
+#include "Trajetsimple.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Trajet::Méthode ( liste des paramètres )
+// type Trajetsimple::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
@@ -31,45 +31,42 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
+Trajetsimple & Trajetsimple::operator = ( const Trajetsimple & unTrajetsimple )
+// Algorithme :
+//
+{
+} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-
-
-Trajet::Trajet (const char* villedepart, const char* villearrivee )
-// Algorithme :
-//
-{
-  #ifdef MAP
-      cout << "Appel au constructeur de <Trajet>" << endl;
-  #endif
-  this->depart=new char[strlen(villedepart)+1];
-  this->arrivee=new char[strlen(villedepart)+1];
-  strcpy(depart,villedepart);
-  strcpy(arrivee,villearrivee);
-
-}
-Trajet::Trajet ( )
-// Algorithme :
-//
-{
-  #ifdef MAP
-      cout << "Appel au constructeur de <Trajet>" << endl;
-  #endif
-} //----- Fin de Trajet
-
-
-Trajet::~Trajet ( )
+Trajetsimple::Trajetsimple ( const Trajetsimple & unTrajetsimple )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Trajet>" << endl;
+    cout << "Appel au constructeur de copie de <Trajetsimple>" << endl;
 #endif
+} //----- Fin de Trajetsimple (constructeur de copie)
 
-  delete[] depart;
-  delete[] arrivee;
-} //----- Fin de ~Trajet
+
+Trajetsimple::Trajetsimple ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Trajetsimple>" << endl;
+#endif
+} //----- Fin de Trajetsimple
+
+
+Trajetsimple::~Trajetsimple ( )
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Trajetsimple>" << endl;
+#endif
+} //----- Fin de ~Trajetsimple
 
 
 //------------------------------------------------------------------ PRIVE
