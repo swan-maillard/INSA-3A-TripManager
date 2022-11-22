@@ -47,7 +47,7 @@ int Trajetcompose::getNbTrajets() const{
 
 ListeTrajets Trajetcompose::getTrajets() const{
   #ifdef MAP
-      cout << "Appel au Get NbTrajets du Trajet" << endl;
+      cout << "Appel au Get Trajets du Trajet" << endl;
   #endif
   return trajets;
 }

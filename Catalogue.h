@@ -52,6 +52,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 int nbTrajets;
+ListeTrajets trajets;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Catalogue>
