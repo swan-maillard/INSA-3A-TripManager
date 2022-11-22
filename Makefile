@@ -1,5 +1,5 @@
-main: main.o Trajet.o Trajetsimple.o ElementListe.o ListeTrajets.o
-	g++ -o main main.o Trajet.o Trajetsimple.o
+main: main.o Trajet.o Trajetsimple.o Trajetcompose.o ElementListe.o ListeTrajets.o
+	g++ -o main main.o Trajet.o Trajetsimple.o Trajetcompose.o ElementListe.o ListeTrajets.o
 
 main.o: main.cpp
 	g++ -c -g -DMAP main.cpp
