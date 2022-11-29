@@ -50,8 +50,12 @@ ListeTrajets::~ListeTrajets ( )
     cout << "Appel au destructeur de <ListeTrajets>" << endl;
 #endif
 
-  delete start;
-  delete end;
+  ElementListe * currentElement = start;
+  while (currentElement != NULL) {
+    ElementListe * next = currentElement->getNext();
+    delete currentElement;
+    currentElement = next;;
+  }
 } //----- Fin de ~ListeTrajets
 
 void ListeTrajets::AddTrajet(Trajet & trajet) {

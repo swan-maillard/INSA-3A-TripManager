@@ -5,33 +5,51 @@ using namespace std;
 #include "Trajetsimple.h"
 #include "ListeTrajets.h"
 #include "Catalogue.h"
-
 #include "Trajetcompose.h"
 
 int main() {
 
-  Catalogue catalogue;
+  int choice;
 
-  cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
+  do {
+    cout << "Grand Catalogue :" << endl;
+    cout << " 1 - Afficher les trajets" << endl;
+    cout << " 2 - Rechercher un trajet" << endl;
+    cout << " 3 - Ajouter un trajet" << endl;
+    cout << " 4 - Quitter" << endl;
+    cout << "Séléction : " << endl;
+    cin >> choice;
 
-  Trajetsimple t1("Paris", "Marseille", "voiture");
-  Trajetsimple t2("Marseille", "Lyon", "bateau");
+    cout << endl;
 
-  catalogue.AddTrajet(t1);
-  catalogue.AddTrajet(t2);
+    if (!cin) {
+      choice = -1;
+      cin.clear();
+      cin.ignore();
+    }
 
-  cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
+    switch (choice) {
+      case 1:
+        cout << "Affichage" << endl;
+        break;
+      case 2:
+        cout << "Recherche" << endl;
+        break;
+      case 3:
+        cout << "Ajoute" << endl;
+        break;
+      case 4:
+        cout << "Au revoir :'('" << endl;
+        break;
+      default:
+        cout << "Veuillez choisir une option parmi celles proposées !" << endl;
+    }
 
-  ListeTrajets l;
-  l.AddTrajet(t1);
-  l.AddTrajet(t2);
+    cout << endl;
 
-  Trajetcompose tc(l);
-  cout << tc.getStart() << " à " << tc.getEnd() << " avec " << tc.getNbTrajets()-1 << " correspondance" << endl;
+  } while (choice != 4);
 
-  catalogue.AddTrajet(tc);
 
-  cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
 
-  return 0;
+  return EXIT_SUCCESS;
 }

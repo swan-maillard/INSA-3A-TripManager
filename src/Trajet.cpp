@@ -47,18 +47,14 @@ char* Trajet::getEnd() const{
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Trajet::Trajet (const char* villedepart, const char* villearrivee )
-// Algorithme :
-//
-{
+Trajet::Trajet (const char* villedepart, const char* villearrivee ) {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajet>" << endl;
   #endif
   this->depart=new char[strlen(villedepart)+1];
   this->arrivee=new char[strlen(villedepart)+1];
-  strcpy(depart,villedepart);
-  strcpy(arrivee,villearrivee);
-
+  strcpy(depart, villedepart);
+  strcpy(arrivee, villearrivee);
 }
 
 

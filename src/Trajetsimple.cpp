@@ -42,22 +42,22 @@ char* Trajetsimple::getTransport() const{
 
 
 Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, const char* letransport)
-: Trajet(depart,arrivee)
+: Trajet(depart, arrivee)
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajetsimple>" << endl;
   #endif
-  transport = new char[(int)strlen(letransport)+1];
+  transport = new char[strlen(letransport)+1];
   strcpy(transport, letransport);
 }
 
-Trajetsimple::~Trajetsimple ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Trajetsimple>" << endl;
-#endif
+Trajetsimple::~Trajetsimple ( ) {
+  #ifdef MAP
+      cout << "Appel au destructeur de <Trajetsimple>" << endl;
+  #endif
+
+  delete [] transport;
+
 } //----- Fin de ~Trajetsimple
 
 

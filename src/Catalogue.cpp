@@ -65,6 +65,8 @@ Catalogue::~Catalogue () {
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
 
+  delete trajets;
+
 }
 
 

@@ -37,7 +37,6 @@ ElementListe::ElementListe (Trajet & trajet) {
 
   this->trajet = &trajet;
   this->next = NULL;
-
 }
 
 void ElementListe::AddNext(ElementListe * element) {
@@ -45,7 +44,7 @@ void ElementListe::AddNext(ElementListe * element) {
       cout << "Appel au AddNext de <ElementListe>" << endl;
   #endif
 
-  
+
   element->next = this->next;
   this->next = element;
 }
@@ -67,14 +66,11 @@ ElementListe* ElementListe::getNext() const {
 }
 
 
-ElementListe::~ElementListe ( )
-// Algorithme :
-//
-{
+ElementListe::~ElementListe () {
 #ifdef MAP
     cout << "Appel au destructeur de <ElementListe>" << endl;
 #endif
-} //----- Fin de ~ElementListe
+}
 
 
 //------------------------------------------------------------------ PRIVE
