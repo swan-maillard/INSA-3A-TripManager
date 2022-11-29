@@ -54,7 +54,7 @@ ListeTrajets::~ListeTrajets ( )
   while (currentElement != NULL) {
     ElementListe * next = currentElement->getNext();
     delete currentElement;
-    currentElement = next;;
+    currentElement = next;
   }
 } //----- Fin de ~ListeTrajets
 
