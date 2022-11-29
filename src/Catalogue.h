@@ -9,6 +9,7 @@
 //---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------------
 #if ! defined ( CATALOGUE_H )
 #define CATALOGUE_H
+#include "ListeTrajets.h"
 
 //--------------------------------------------------- Interfaces utilisées
 

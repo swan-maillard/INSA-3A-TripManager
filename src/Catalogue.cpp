@@ -17,6 +17,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
+#include "ListeTrajets.h"
 
 //------------------------------------------------------------- Constantes
 

@@ -7,7 +7,7 @@ using namespace std;
 
 
 int main() {
-
+  
   char ville1[]="Marseille";
   char ville2[]="Lyon";
   char transport[]="MT1";

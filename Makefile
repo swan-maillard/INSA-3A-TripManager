@@ -1,17 +1,46 @@
-main: main.o Trajet.o Trajetsimple.o Trajetcompose.o ElementListe.o ListeTrajets.o
-	g++ -o main main.o Trajet.o Trajetsimple.o Trajetcompose.o ElementListe.o ListeTrajets.o
+#Outils
+CXX=g++
+LD=g++
+RM=rm
+ECHO=echo
 
-main.o: main.cpp
-	g++ -c -g main.cpp
+#Options
+CXXFLAGS=-ansi -pedantic -Wall -std=c++11 -g
+DEVFLAGS=-DMAP
+RMFLAGS=-rf
 
-Trajet.o: Trajet.cpp
-	g++ -c -g -DMAP Trajet.cpp
+#Fichiers
+CLASS_DIR=src
+OBJ_DIR=objects
+SRC=$(wildcard $(CLASS_DIR)/*.cpp)
+OBJ=$(SRC:$(CLASS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+LIBS=
 
-Trajetsimple.o: Trajetsimple.cpp
-	g++ -c -g -DMAP Trajetsimple.cpp
+#Cibles speciales
+EXE=out
+RUN=run
+DEV=dev
+CLEAN=clean
+.PHONY: $(CLEAN) $(RUN)
 
-ElementListe.o: ElementListe.cpp
-	g++ -c -g -DMAP ElementListe.cpp
+#Cibles
+$(EXE): $(OBJ)
+	@$(ECHO) Edition des liens
+	@$(LD) $^ -o $@ $(LIBS)
 
-ListeTrajets.o: ListeTrajets.cpp
-	g++ -c -g -DMAP ListeTrajets.cpp
+$(RUN): $(EXE)
+	@$(ECHO) Execution de $^
+	@./$(EXE)
+
+$(DEV): CXXFLAGS+=$(DEVFLAGS)
+$(DEV): $(EXE)
+
+$(CLEAN):
+	@$(RM) $(RMFLAGS) $(EXE) $(OBJ)
+
+#Dependances complementaires
+
+#Regles d'inference
+$(OBJ_DIR)/%.o: %.cpp
+	@$(ECHO) Compilation de $<
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
