@@ -13,7 +13,7 @@ RMFLAGS=-rf
 CLASS_DIR=src
 OBJ_DIR=objects
 SRC=$(wildcard $(CLASS_DIR)/*.cpp)
-OBJ=$(SRC:$(CLASS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+OBJ=$(SRC:.cpp=.o)
 LIBS=
 
 #Cibles speciales
@@ -41,6 +41,6 @@ $(CLEAN):
 #Dependances complementaires
 
 #Regles d'inference
-$(OBJ_DIR)/%.o: %.cpp
+%.o: %.cpp
 	@$(ECHO) Compilation de $<
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
