@@ -30,11 +30,11 @@ using namespace std;
 //} //----- Fin de Méthode
 
 void Trajet::Afficher() const {
-  for (int i=0;i<strlen(depart);i++){
+  for (int i=0;i<(int)strlen(depart);i++){
     cout << depart[i];
   }
   cout << " à ";
-  for (int i=0;i<strlen(arrivee);i++){
+  for (int i=0;i<(int)strlen(arrivee);i++){
     cout << arrivee[i];
   }
 }

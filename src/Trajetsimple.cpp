@@ -34,7 +34,7 @@ void  Trajetsimple::Afficher() const {
   Trajet::Afficher();
 
   cout << " en ";
-  for (int i=0;i<strlen(transport);i++){
+  for (int i=0;i<(int)strlen(transport);i++){
     cout << transport[i];
   }
   cout << endl;
