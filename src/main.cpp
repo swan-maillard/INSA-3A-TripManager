@@ -10,6 +10,29 @@ using namespace std;
 int main() {
 
   int choice;
+  Catalogue test;
+  Trajetsimple trajetsimple("A","B","MT1");
+  Trajetsimple ts2("B","C","MT1");
+
+  Trajetsimple sous1tc("B","Y","MT3");
+  Trajetsimple sous2tc("Y","C","MT2");
+
+  ListeTrajets listetc1;
+  listetc1.AddTrajet(sous1tc);
+  listetc1.AddTrajet(sous2tc);
+  Trajetcompose trajetcompose(listetc1);
+
+  Trajetsimple sous1tc2("A","Z","MT2");
+  Trajetsimple sous2tc2("Z","C","MT1");
+
+  ListeTrajets listetc2;
+  listetc2.AddTrajet(sous1tc2);
+  listetc2.AddTrajet(sous2tc2);
+  Trajetcompose tc2(listetc2);
+
+  ElementListe* currentElement = trajetcompose.getTrajets()->GetStart(); //pour les trajets composés après
+
+
 
   do {
     cout << "Grand Catalogue :" << endl;
@@ -31,6 +54,22 @@ int main() {
     switch (choice) {
       case 1:
         cout << "Affichage" << endl;
+        /*ElementListe * currentElement = start;
+        while (currentElement != NULL) {
+          ElementListe * next = currentElement->getNext();
+          delete currentElement;
+          currentElement = next;*/
+
+          //Trajet simple
+          cout << "Trajet de " << trajetsimple.getStart() << " à " << trajetsimple.getEnd() << " en " << trajetsimple.getTransport()<<endl;
+
+          //Trajet Trajetcompose
+          cout<<"Trajet de ";
+          while(currentElement!=NULL){
+            cout<<currentElement->getTrajet()->getStart()<<" à "<<currentElement->getTrajet()->getEnd()<<" en "<<currentElement->getTrajet()->getTransport();
+            currentElement=currentElement->getNext();
+          }
+
         break;
       case 2:
         cout << "Recherche" << endl;
