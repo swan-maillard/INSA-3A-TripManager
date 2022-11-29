@@ -51,6 +51,14 @@ int Catalogue::GetNbTrajets() {
   return trajets->GetSize();
 }
 
+ListeTrajets * Catalogue::GetTrajets() {
+  #ifdef MAP
+      cout << "Appel à GetTrajets de <Catalogue>" << endl;
+  #endif
+
+  return trajets;
+}
+
 void Catalogue::AddTrajet(Trajet & trajet) {
   #ifdef MAP
       cout << "Appel à AddTrajet de <Catalogue>" << endl;

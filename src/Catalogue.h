@@ -32,6 +32,7 @@ public:
 
     Catalogue ();
     int GetNbTrajets();
+    ListeTrajets * GetTrajets();
     void AddTrajet(Trajet & trajet);
     virtual ~Catalogue ();
 
