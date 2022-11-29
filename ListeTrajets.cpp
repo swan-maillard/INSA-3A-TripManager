@@ -62,7 +62,10 @@ void ListeTrajets::AddTrajet(Trajet & trajet) {
   size++;
   ElementListe * lastTrajet = end;
   end = new ElementListe(trajet);
-  lastTrajet->AddNext(end);
+  if (lastTrajet != NULL)
+    lastTrajet->AddNext(end);
+  if (start == NULL)
+    start = end;
 }
 
 ElementListe * ListeTrajets::GetStart() {

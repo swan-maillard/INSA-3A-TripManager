@@ -45,6 +45,7 @@ void ElementListe::AddNext(ElementListe * element) {
       cout << "Appel au AddNext de <ElementListe>" << endl;
   #endif
 
+  
   element->next = this->next;
   this->next = element;
 }

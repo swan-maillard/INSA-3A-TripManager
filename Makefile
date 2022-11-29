@@ -2,7 +2,7 @@ main: main.o Trajet.o Trajetsimple.o Trajetcompose.o ElementListe.o ListeTrajets
 	g++ -o main main.o Trajet.o Trajetsimple.o Trajetcompose.o ElementListe.o ListeTrajets.o
 
 main.o: main.cpp
-	g++ -c -g -DMAP main.cpp
+	g++ -c -g main.cpp
 
 Trajet.o: Trajet.cpp
 	g++ -c -g -DMAP Trajet.cpp
