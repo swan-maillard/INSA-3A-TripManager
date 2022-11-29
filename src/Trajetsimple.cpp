@@ -31,9 +31,8 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void Trajetsimple::Affichage() const{
-  cout << "Trajet de " << depart << " à " << arrivee << " en " << transport << endl;
-
+void Trajetsimple::Affichage() const {
+  cout << depart << " à " << arrivee << " en " << transport << endl;
 }
 
 

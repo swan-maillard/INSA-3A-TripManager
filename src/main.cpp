@@ -10,31 +10,36 @@ using namespace std;
 int main() {
 
   int choice;
-  Catalogue test;
-  Trajetsimple ts1("As","Bs","MT1");
-  Trajetsimple ts2("Bs","Cs","MT1");
+  Catalogue catalogue;
+  Trajetsimple ts1("Annecy","Limoges","Voiture");
+  Trajetsimple ts2("Brest","Carcassonne","Voiture");
+  Trajetsimple ts3("Paris", "Epinal", "Bateau");
+  Trajetsimple ts4("Epinal", "Carcassonne", "Avion");
 
-  Trajetsimple sous1tc("Bc","Yc","MT3");
-  Trajetsimple sous2tc("Yc","Cc","MT2");
+  Trajetsimple sous1tc("Bron","Villeurbanne","Avion");
+  Trajetsimple sous2tc("Villeurbanne","Cabourg","Bateau");
 
   ListeTrajets listetc1;
   listetc1.AddTrajetQueue(sous1tc);
   listetc1.AddTrajetQueue(sous2tc);
   Trajetcompose tc1(listetc1);
 
-  Trajetsimple sous1tc2("Uc","ZC","MT2");
-  Trajetsimple sous2tc2("Zc","Dc","MT1");
+  Trajetsimple sous1tc2("Marseille","Toulon","Bateau");
+  Trajetsimple sous2tc2("Toulon","Toulouse","Bateau");
+  Trajetsimple sous3tc2("Toulouse","Aix-En-Provence","Voiture");
 
   ListeTrajets listetc2;
   listetc2.AddTrajetQueue(sous1tc2);
   listetc2.AddTrajetQueue(sous2tc2);
+  listetc2.AddTrajetQueue(sous3tc2);
   Trajetcompose tc2(listetc2);
 
-  test.AddTrajet(ts2);
-  test.AddTrajet(tc1);
-  test.AddTrajet(ts1);
-  test.AddTrajet(tc2);
-
+  catalogue.AddTrajet(ts1);
+  catalogue.AddTrajet(ts2);
+  catalogue.AddTrajet(ts3);
+  catalogue.AddTrajet(ts4);
+  catalogue.AddTrajet(tc1);
+  catalogue.AddTrajet(tc2);
 
   do {
     cout << "Grand Catalogue :" << endl;
@@ -42,7 +47,6 @@ int main() {
     cout << " 2 - Rechercher un trajet" << endl;
     cout << " 3 - Ajouter un trajet" << endl;
     cout << " 4 - Quitter" << endl;
-    cout << "Séléction : " << endl;
     cin >> choice;
 
     cout << endl;
@@ -53,29 +57,18 @@ int main() {
       cin.ignore();
     }
 
-    ElementListe* currentElement = test.GetTrajets()->GetStart();
-
-
     switch (choice) {
-      case 1:
-        cout << "Affichage" << endl;
-        cout << test.GetNbTrajets() << endl;
-        while(currentElement!=NULL){
-          currentElement->getTrajet()->Affichage();
-          currentElement=currentElement->getNext();
-        }
-
+      case 1: // Affichage
+        catalogue.Afficher();
         break;
-      case 2:
-        cout << "Recherche" << endl;
+      case 2: // Recherche
         break;
-      case 3:
-        cout << "Ajoute" << endl;
+      case 3: // Ajout
         break;
-      case 4:
-        cout << "Au revoir :'('" << endl;
+      case 4: // Fin
+        cout << "A bientôt dans notre grand catalogue !" << endl;
         break;
-      default:
+      default: // Erreur de saisie
         cout << "Veuillez choisir une option parmi celles proposées !" << endl;
     }
 

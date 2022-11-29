@@ -31,8 +31,9 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     Catalogue ();
-    int GetNbTrajets();
-    ListeTrajets * GetTrajets();
+    void Afficher() const;
+    int GetNbTrajets() const;
+    ElementListe * GetStart() const;
     void AddTrajet(Trajet & trajet);
     virtual ~Catalogue ();
 

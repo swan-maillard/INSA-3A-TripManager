@@ -43,7 +43,22 @@ Catalogue::Catalogue () {
   trajets = new ListeTrajets();
 }
 
-int Catalogue::GetNbTrajets() {
+void Catalogue::Afficher() const {
+  #ifdef MAP
+      cout << "Appel à Afficher de <Catalogue>" << endl;
+  #endif
+
+  ElementListe * currentElement = GetStart();
+
+  cout << "Notre catalogue propose " << GetNbTrajets() << " trajets :" << endl;
+  while (currentElement != NULL) {
+    cout << "- ";
+    currentElement->getTrajet()->Affichage();
+    currentElement = currentElement->getNext();
+  }
+}
+
+int Catalogue::GetNbTrajets() const {
   #ifdef MAP
       cout << "Appel à GetNbTrajets de <Catalogue>" << endl;
   #endif
@@ -51,12 +66,12 @@ int Catalogue::GetNbTrajets() {
   return trajets->GetSize();
 }
 
-ListeTrajets * Catalogue::GetTrajets() {
+ElementListe * Catalogue::GetStart() const {
   #ifdef MAP
-      cout << "Appel à GetTrajets de <Catalogue>" << endl;
+      cout << "Appel à GetStart de <Catalogue>" << endl;
   #endif
 
-  return trajets;
+  return trajets->GetStart();
 }
 
 void Catalogue::AddTrajet(Trajet & trajet) {

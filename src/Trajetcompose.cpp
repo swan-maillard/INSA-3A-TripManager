@@ -34,11 +34,13 @@ using namespace std;
 
 void Trajetcompose::Affichage() const{
 
-ElementListe* currentElement = trajets->GetStart();
+  ElementListe * currentElement = trajets->GetStart();
 
-  while(currentElement!=NULL){
+  cout << depart << " à " << arrivee << " avec "  << getNbTrajets() - 1 << " correspondances :" << endl;
+  while(currentElement != NULL) {
+    cout << "\t- ";
     currentElement->getTrajet()->Affichage();
-    currentElement=currentElement->getNext();
+    currentElement = currentElement->getNext();
   }
 
 }

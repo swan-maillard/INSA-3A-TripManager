@@ -44,8 +44,11 @@ void ElementListe::AddNext(ElementListe * element) {
       cout << "Appel au AddNext de <ElementListe>" << endl;
   #endif
 
+  ElementListe * elementNext = element->next;
+  while (elementNext != NULL)
+    elementNext = elementNext->next;
 
-  element->next = this->next;
+  elementNext = this->next;
   this->next = element;
 }
 
