@@ -39,6 +39,7 @@ public:
     virtual void Afficher() const;
     int getNbTrajets() const;
     ListeTrajets getTrajets() const;
+    void addTrajets(Trajet trajet, int index);
 
 
 //-------------------------------------------- Constructeurs - destructeur

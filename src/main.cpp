@@ -6,6 +6,7 @@ using namespace std;
 #include "ListeTrajets.h"
 #include "Catalogue.h"
 
+#include "Trajetcompose.h"
 
 int main() {
 
