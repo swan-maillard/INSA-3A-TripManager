@@ -35,26 +35,37 @@ using namespace std;
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Catalogue::Catalogue ()
-// Algorithme :
-//
-{
+Catalogue::Catalogue () {
   #ifdef MAP
       cout << "Appel au constructeur de <Catalogue>" << endl;
   #endif
 
+  trajets = new ListeTrajets();
+}
+
+int Catalogue::GetNbTrajets() {
+  #ifdef MAP
+      cout << "Appel à GetNbTrajets de <Catalogue>" << endl;
+  #endif
+
+  return trajets->GetSize();
+}
+
+void Catalogue::AddTrajet(Trajet & trajet) {
+  #ifdef MAP
+      cout << "Appel à AddTrajet de <Catalogue>" << endl;
+  #endif
+
+  trajets->AddTrajet(trajet);
 }
 
 
-Catalogue::~Catalogue ( )
-// Algorithme :
-//
-{
+Catalogue::~Catalogue () {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
 
-} //----- Fin de ~Catalogue
+}
 
 
 //------------------------------------------------------------------ PRIVE

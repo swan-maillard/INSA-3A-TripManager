@@ -50,12 +50,14 @@ char* Trajetsimple::getTransport() const{
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, char* letransport)
-: Trajet(depart,arrivee), transport(letransport)
+Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, const char* letransport)
+: Trajet(depart,arrivee)
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajetsimple>" << endl;
   #endif
+  transport = new char[(int)strlen(letransport)+1];
+  strcpy(transport, letransport);
 }
 
 Trajetsimple::~Trajetsimple ( )

@@ -25,22 +25,27 @@ CLEAN=clean
 
 #Cibles
 $(EXE): $(OBJ)
-	@$(ECHO) Edition des liens
+	@$(ECHO) [MAKE] Edition des liens
 	@$(LD) $^ -o $@ $(LIBS)
 
 $(RUN): $(EXE)
-	@$(ECHO) Execution de $^
+	@$(ECHO) [MAKE] Execution de $^
+	@$(ECHO) ------------------
+	@$(ECHO)
 	@./$(EXE)
 
 $(DEV): CXXFLAGS+=$(DEVFLAGS)
-$(DEV): $(EXE)
+$(DEV): $(CLEAN) $(EXE)
+	@$(ECHO) [MAKE] Mode développement
 
 $(CLEAN):
+	@$(ECHO) [MAKE] Suppression des fichiers compilés et de $(EXE)
 	@$(RM) $(RMFLAGS) $(EXE) $(OBJ)
+
 
 #Dependances complementaires
 
 #Regles d'inference
 %.o: %.cpp
-	@$(ECHO) Compilation de $<
+	@$(ECHO) [MAKE] Compilation de $<
 	@$(CXX) $(CXXFLAGS) -c $< -o $@

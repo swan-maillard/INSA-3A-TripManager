@@ -29,22 +29,11 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
     Catalogue ();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    virtual ~Catalogue ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    int GetNbTrajets();
+    void AddTrajet(Trajet & trajet);
+    virtual ~Catalogue ();
 
 //------------------------------------------------------------------ PRIVE
 
@@ -52,8 +41,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-int nbTrajets;
-ListeTrajets trajets;
+  ListeTrajets * trajets;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Catalogue>

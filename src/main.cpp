@@ -4,30 +4,22 @@ using namespace std;
 #include "Trajet.h"
 #include "Trajetsimple.h"
 #include "ListeTrajets.h"
+#include "Catalogue.h"
 
 
 int main() {
 
-  char ville1[]="Marseille";
-  char ville2[]="Lyon";
-  char transport[]="MT1";
+  Catalogue catalogue;
 
-  Trajetsimple t(ville1, ville2, transport);
-  Trajet trajet(ville1, ville2);
-  Trajet trajet2("Lyon", "Paris");
+  cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
 
-  t.Afficher();
-  ListeTrajets list;
+  Trajetsimple t1("Paris", "Marseille", "voiture");
+  Trajetsimple t2("Marseille", "Lyon", "bateau");
 
-  list.AddTrajet(trajet);
-  list.AddTrajet(trajet2);
+  catalogue.AddTrajet(t1);
+  catalogue.AddTrajet(t2);
 
-  cout << "Départ : " << list.GetStart()->getTrajet()->getStart() << endl;
-  cout << "Correspondances : " << list.GetSize() - 1 << endl;
-  cout << "Arrivée : " << list.GetEnd()->getTrajet()->getEnd() << endl;
+  cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
 
-
-  char* gettest=t.getTransport();
-  cout<<gettest << endl;
   return 0;
 }
