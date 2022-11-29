@@ -64,7 +64,7 @@ void Catalogue::AddTrajet(Trajet & trajet) {
       cout << "Appel à AddTrajet de <Catalogue>" << endl;
   #endif
 
-  trajets->AddTrajet(trajet);
+  trajets->AddTrajetAlpha(trajet);
 }
 
 

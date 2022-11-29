@@ -54,13 +54,13 @@ ListeTrajets::~ListeTrajets ( )
   while (currentElement != NULL) {
     ElementListe * next = currentElement->getNext();
     delete currentElement;
-    currentElement = next;;
+    currentElement = next;
   }
 } //----- Fin de ~ListeTrajets
 
-void ListeTrajets::AddTrajet(Trajet & trajet) {
+void ListeTrajets::AddTrajetQueue(Trajet & trajet) {
   #ifdef MAP
-      cout << "Appel au AddTrajet de <ListeTrajets>" << endl;
+      cout << "Appel au AddTrajetQueue de <ListeTrajets>" << endl;
   #endif
 
   size++;
@@ -70,6 +70,47 @@ void ListeTrajets::AddTrajet(Trajet & trajet) {
     lastTrajet->AddNext(end);
   if (start == NULL)
     start = end;
+}
+
+void ListeTrajets::AddTrajetAlpha(Trajet & trajet) {
+  #ifdef MAP
+      cout << "Appel au AddTrajetAlpha de <ListeTrajets>" << endl;
+  #endif
+
+  size++;
+  if (start == NULL) {
+    start = end = new ElementListe(trajet);
+    return;
+  }
+
+  ElementListe * previousElement = NULL;
+  ElementListe * currentElement = start;
+  int inserted = 0;
+
+  while (currentElement != NULL && !inserted) {
+    char * cityEndCurrent = currentElement->getTrajet()->getEnd();
+    char * cityEndToInsert = trajet.getEnd();
+
+    if (strcmp(cityEndToInsert, cityEndCurrent) < 0) {
+      if (previousElement == NULL) {
+        previousElement = new ElementListe(trajet);
+        previousElement->AddNext(currentElement);
+        start = previousElement;
+        inserted = 1;
+      }
+      else {
+        char * cityEndPrevious = previousElement->getTrajet()->getEnd();
+        if (strcmp(cityEndToInsert, cityEndPrevious) >= 0) {
+          ElementListe * newElement = new ElementListe(trajet);
+          newElement->AddNext(currentElement);
+          previousElement->AddNext(newElement);
+        }
+      }
+    }
+    previousElement = currentElement;
+    currentElement = currentElement->getNext();
+  }
+
 }
 
 ElementListe * ListeTrajets::GetStart() {

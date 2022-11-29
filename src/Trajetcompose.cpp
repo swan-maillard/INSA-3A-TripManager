@@ -52,7 +52,7 @@ void Trajetcompose::addTrajets(Trajet & trajet){
       cout << "Appel au AddTrajet du trajet composé" << endl;
   #endif
 
-   this->trajets->AddTrajet(trajet);
+   this->trajets->AddTrajetQueue(trajet);
 }
 
 //-------------------------------------------- Constructeurs - destructeur

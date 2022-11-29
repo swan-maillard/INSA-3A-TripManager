@@ -45,7 +45,8 @@ public:
     // Contrat :
     //
 
-    void AddTrajet(Trajet & trajet);
+    void AddTrajetQueue(Trajet & trajet);
+    void AddTrajetAlpha(Trajet & trajet);
 
     ElementListe * GetStart();
 
