@@ -51,15 +51,28 @@ ListeTrajets Trajetcompose::getTrajets() const{
   #endif
   return trajets;
 }
+
+void Trajetcompose::addTrajets(Trajet trajet, int index){
+  #ifdef MAP
+      cout << "Appel au AddTrajet du trajet composé" << endl;
+  #endif
+   this->trajets.AddTrajet(trajet);
+   this->nbtrajets+=1;
+
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 
 
 Trajetcompose::Trajetcompose(const char* depart, const char* arrivee, ListeTrajets lestrajets,int lenbtrajets)
-: Trajet(depart,arrivee), nbtrajets(lenbtrajets)
+: Trajet(depart,arrivee)
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajetcompose>" << endl;
   #endif
+
+  this->nbtrajets=lenbtrajets;
+  this->trajets=lestrajets;
 }
 
 Trajetcompose::~Trajetcompose ( )
@@ -69,6 +82,7 @@ Trajetcompose::~Trajetcompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Trajetcompose>" << endl;
 #endif
+
 } //----- Fin de ~Trajetcompose
 
 
