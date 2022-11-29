@@ -36,6 +36,7 @@ public:
     //
     // Contrat :
     //
+    void Affichage() const;
     int getNbTrajets() const;
     ListeTrajets * getTrajets() const;
     void addTrajets(Trajet & trajet);

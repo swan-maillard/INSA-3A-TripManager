@@ -31,6 +31,12 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+void Trajetsimple::Affichage() const{
+  cout << "Trajet de " << depart << " à " << arrivee << " en " << transport << endl;
+
+}
+
+
 char* Trajetsimple::getTransport() const{
   #ifdef MAP
       cout << "Appel au Get Transport du Trajet" << endl;

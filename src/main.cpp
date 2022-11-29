@@ -11,27 +11,29 @@ int main() {
 
   int choice;
   Catalogue test;
-  Trajetsimple trajetsimple("A","B","MT1");
-  Trajetsimple ts2("B","C","MT1");
+  Trajetsimple ts1("As","Bs","MT1");
+  Trajetsimple ts2("Bs","Cs","MT1");
 
-  Trajetsimple sous1tc("B","Y","MT3");
-  Trajetsimple sous2tc("Y","C","MT2");
+  Trajetsimple sous1tc("Bc","Yc","MT3");
+  Trajetsimple sous2tc("Yc","Cc","MT2");
 
   ListeTrajets listetc1;
-  listetc1.AddTrajet(sous1tc);
-  listetc1.AddTrajet(sous2tc);
-  Trajetcompose trajetcompose(listetc1);
+  listetc1.AddTrajetQueue(sous1tc);
+  listetc1.AddTrajetQueue(sous2tc);
+  Trajetcompose tc1(listetc1);
 
-  Trajetsimple sous1tc2("A","Z","MT2");
-  Trajetsimple sous2tc2("Z","C","MT1");
+  Trajetsimple sous1tc2("Uc","ZC","MT2");
+  Trajetsimple sous2tc2("Zc","Dc","MT1");
 
   ListeTrajets listetc2;
-  listetc2.AddTrajet(sous1tc2);
-  listetc2.AddTrajet(sous2tc2);
+  listetc2.AddTrajetQueue(sous1tc2);
+  listetc2.AddTrajetQueue(sous2tc2);
   Trajetcompose tc2(listetc2);
 
-  ElementListe* currentElement = trajetcompose.getTrajets()->GetStart(); //pour les trajets composés après
-
+  test.AddTrajet(ts2);
+  test.AddTrajet(tc1);
+  test.AddTrajet(ts1);
+  test.AddTrajet(tc2);
 
 
   do {
@@ -51,24 +53,17 @@ int main() {
       cin.ignore();
     }
 
+    ElementListe* currentElement = test.GetTrajets()->GetStart();
+
+
     switch (choice) {
       case 1:
         cout << "Affichage" << endl;
-        /*ElementListe * currentElement = start;
-        while (currentElement != NULL) {
-          ElementListe * next = currentElement->getNext();
-          delete currentElement;
-          currentElement = next;*/
-
-          //Trajet simple
-          cout << "Trajet de " << trajetsimple.getStart() << " à " << trajetsimple.getEnd() << " en " << trajetsimple.getTransport()<<endl;
-
-          //Trajet Trajetcompose
-          cout<<"Trajet de ";
-          while(currentElement!=NULL){
-            cout<<currentElement->getTrajet()->getStart()<<" à "<<currentElement->getTrajet()->getEnd()<<" en "<<currentElement->getTrajet()->getTransport();
-            currentElement=currentElement->getNext();
-          }
+        cout << test.GetNbTrajets() << endl;
+        while(currentElement!=NULL){
+          currentElement->getTrajet()->Affichage();
+          currentElement=currentElement->getNext();
+        }
 
         break;
       case 2:

@@ -32,6 +32,17 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+void Trajetcompose::Affichage() const{
+
+ElementListe* currentElement = trajets->GetStart();
+
+  while(currentElement!=NULL){
+    currentElement->getTrajet()->Affichage();
+    currentElement=currentElement->getNext();
+  }
+
+}
+
 int Trajetcompose::getNbTrajets() const{
   #ifdef MAP
       cout << "Appel au Get NbTrajets du Trajet" << endl;
