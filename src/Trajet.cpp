@@ -29,16 +29,6 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void Trajet::Afficher() const {
-  for (int i=0;i<(int)strlen(depart);i++){
-    cout << depart[i];
-  }
-  cout << " à ";
-  for (int i=0;i<(int)strlen(arrivee);i++){
-    cout << arrivee[i];
-  }
-}
-
 char* Trajet::getStart() const{
   #ifdef MAP
       cout << "Appel au Get Start du Trajet" << endl;

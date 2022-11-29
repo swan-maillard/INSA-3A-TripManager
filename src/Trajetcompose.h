@@ -36,27 +36,21 @@ public:
     //
     // Contrat :
     //
-    virtual void Afficher() const;
     int getNbTrajets() const;
-    ListeTrajets getTrajets() const;
-    void addTrajets(Trajet trajet, int index);
+    ListeTrajets * getTrajets() const;
+    void addTrajets(Trajet & trajet);
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Trajetcompose (const char* depart, const char* arrivee, ListeTrajets lestrajets,int nbtrajets); //a modifier pour enlever départ et arrivée (mais ça faisait des pb)
+    Trajetcompose (ListeTrajets & lestrajets); //a modifier pour enlever départ et arrivée (mais ça faisait des pb)
 
     virtual ~Trajetcompose ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 //------------------------------------------------------------------ PRIVE
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-ListeTrajets trajets;
-int nbtrajets;
+ListeTrajets * trajets;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajetcompose>

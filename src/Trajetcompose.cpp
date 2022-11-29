@@ -31,48 +31,41 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-void  Trajetcompose::Afficher() const {
-  Trajet::Afficher();
-
-  cout << " en ";
-
-}
 
 int Trajetcompose::getNbTrajets() const{
   #ifdef MAP
       cout << "Appel au Get NbTrajets du Trajet" << endl;
   #endif
-  return nbtrajets;
+
+  return trajets->GetSize();
 }
 
-ListeTrajets Trajetcompose::getTrajets() const{
+ListeTrajets * Trajetcompose::getTrajets() const{
   #ifdef MAP
       cout << "Appel au Get Trajets du Trajet" << endl;
   #endif
   return trajets;
 }
 
-void Trajetcompose::addTrajets(Trajet trajet, int index){
+void Trajetcompose::addTrajets(Trajet & trajet){
   #ifdef MAP
       cout << "Appel au AddTrajet du trajet composé" << endl;
   #endif
-   this->trajets.AddTrajet(trajet);
-   this->nbtrajets+=1;
 
+   this->trajets->AddTrajet(trajet);
 }
 
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Trajetcompose::Trajetcompose(const char* depart, const char* arrivee, ListeTrajets lestrajets,int lenbtrajets)
-: Trajet(depart,arrivee)
+Trajetcompose::Trajetcompose(ListeTrajets & lestrajets)
+: Trajet(lestrajets.GetStart()->getTrajet()->getStart(), lestrajets.GetEnd()->getTrajet()->getEnd())
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajetcompose>" << endl;
   #endif
 
-  this->nbtrajets=lenbtrajets;
-  this->trajets=lestrajets;
+  trajets = &lestrajets;
 }
 
 Trajetcompose::~Trajetcompose ( )

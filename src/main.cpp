@@ -22,5 +22,16 @@ int main() {
 
   cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
 
+  ListeTrajets l;
+  l.AddTrajet(t1);
+  l.AddTrajet(t2);
+
+  Trajetcompose tc(l);
+  cout << tc.getStart() << " à " << tc.getEnd() << " avec " << tc.getNbTrajets()-1 << " correspondance" << endl;
+
+  catalogue.AddTrajet(tc);
+
+  cout << "Trajets : " << catalogue.GetNbTrajets() << endl;
+
   return 0;
 }

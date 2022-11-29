@@ -33,7 +33,6 @@ public:
     //
     // Contrat :
     //
-    virtual void Afficher() const;
     virtual char* getStart() const;
     virtual char* getEnd() const;
 

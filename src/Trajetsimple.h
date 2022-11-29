@@ -34,7 +34,6 @@ public:
     //
     // Contrat :
     //
-    virtual void Afficher() const;
     char* getTransport() const;
 
 
