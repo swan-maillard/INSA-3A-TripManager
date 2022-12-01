@@ -19,9 +19,10 @@ LIBS=
 #Cibles speciales
 EXE=out
 RUN=run
+BUILD=build
 DEV=dev
 CLEAN=clean
-.PHONY: $(CLEAN) $(RUN)
+.PHONY: $(CLEAN) $(RUN) $(BUILD)
 
 #Cibles
 $(EXE): $(OBJ)
@@ -29,10 +30,10 @@ $(EXE): $(OBJ)
 	@$(LD) $^ -o $@ $(LIBS)
 
 $(RUN): $(EXE)
-	@$(ECHO) [MAKE] Execution de $^
-	@$(ECHO) ------------------
-	@$(ECHO)
 	@./$(EXE)
+
+$(BUILD): $(CLEAN) $(EXE)
+	@$(ECHO) [MAKE] Mode standard
 
 $(DEV): CXXFLAGS+=$(DEVFLAGS)
 $(DEV): $(CLEAN) $(EXE)

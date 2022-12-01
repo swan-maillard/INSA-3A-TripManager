@@ -10,6 +10,8 @@
 #if ! defined ( LISTE_TRAJETS_H )
 #define LISTE_TRAJETS_H
 #include "ElementListe.h"
+#include "Iterator.h"
+#include "Trajet.h"
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -24,7 +26,7 @@
 //------------------------------------------------------------------------
 
 class ListeTrajets
-{
+{Iterator * iterator;
 //----------------------------------------------------------------- PUBLIC
 
 public:
@@ -36,23 +38,20 @@ public:
     //
 
     ListeTrajets ();
-    // Mode d'emploi :
-    //
-    // Contrat :
+
     virtual ~ListeTrajets ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     void AddTrajetQueue(Trajet & trajet);
+
     void AddTrajetAlpha(Trajet & trajet);
 
-    ElementListe * GetStart();
+    Trajet * GetFirstTrajet() const;
 
-    ElementListe * GetEnd();
+    Trajet * GetLastTrajet() const;
 
-    int GetSize();
+    int GetSize() const;
+
+    Iterator * GetIterator() const;
 
 //------------------------------------------------------------------ PRIVE
 
@@ -63,7 +62,6 @@ protected:
 ElementListe * start;
 ElementListe * end;
 int size;
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <ListeTrajets>

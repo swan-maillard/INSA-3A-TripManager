@@ -32,37 +32,52 @@ using namespace std;
 //} //----- Fin de Méthode
 
 void Trajetsimple::Affichage() const {
-  cout << depart << " à " << arrivee << " en " << transport << endl;
+  cout << getStart() << " à " << getEnd() << " en " << transport << endl;
 }
 
 
-char* Trajetsimple::getTransport() const{
+const char* Trajetsimple::getTransport() const{
   #ifdef MAP
       cout << "Appel au Get Transport du Trajet" << endl;
   #endif
   return transport;
 }
 
+const char* Trajetsimple::getStart() const{
+  #ifdef MAP
+      cout << "Appel au Get Transport du Trajet" << endl;
+  #endif
+
+  return depart;
+}
+
+const char* Trajetsimple::getEnd() const{
+  #ifdef MAP
+      cout << "Appel au Get Transport du Trajet" << endl;
+  #endif
+
+  return arrivee;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 
 
 Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, const char* letransport)
-: Trajet(depart, arrivee)
+: Trajet()
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajetsimple>" << endl;
   #endif
-  transport = new char[strlen(letransport)+1];
-  strcpy(transport, letransport);
+
+  this->depart = depart;
+  this->arrivee = arrivee;
+  transport = letransport;
 }
 
 Trajetsimple::~Trajetsimple ( ) {
   #ifdef MAP
       cout << "Appel au destructeur de <Trajetsimple>" << endl;
   #endif
-
-  delete [] transport;
-
 } //----- Fin de ~Trajetsimple
 
 

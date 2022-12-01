@@ -34,15 +34,30 @@ using namespace std;
 
 void Trajetcompose::Affichage() const{
 
-  ElementListe * currentElement = trajets->GetStart();
-
-  cout << depart << " à " << arrivee << " avec "  << getNbTrajets() - 1 << " correspondances :" << endl;
-  while(currentElement != NULL) {
+  Iterator * trajetIterator = trajets->GetIterator();
+  Trajet * currentTrajet;
+  cout << getStart() << " à " << getEnd() << " avec "  << getNbTrajets() - 1 << " correspondances :" << endl;
+  while((currentTrajet = trajetIterator->Next()) != NULL) {
     cout << "\t- ";
-    currentElement->getTrajet()->Affichage();
-    currentElement = currentElement->getNext();
+    currentTrajet->Affichage();
   }
+  delete trajetIterator;
+}
 
+const char* Trajetcompose::getStart() const{
+  #ifdef MAP
+      cout << "Appel au Get Transport du Trajet" << endl;
+  #endif
+
+  return trajets->GetFirstTrajet()->getStart();
+}
+
+const char* Trajetcompose::getEnd() const{
+  #ifdef MAP
+      cout << "Appel au Get Transport du Trajet" << endl;
+  #endif
+
+  return trajets->GetLastTrajet()->getEnd();
 }
 
 int Trajetcompose::getNbTrajets() const{
@@ -68,17 +83,21 @@ void Trajetcompose::addTrajets(Trajet & trajet){
    this->trajets->AddTrajetQueue(trajet);
 }
 
+void Trajetcompose::Add(Trajet& trajet){
+  trajets->AddTrajetQueue(trajet);
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Trajetcompose::Trajetcompose(ListeTrajets & lestrajets)
-: Trajet(lestrajets.GetStart()->getTrajet()->getStart(), lestrajets.GetEnd()->getTrajet()->getEnd())
+Trajetcompose::Trajetcompose()
+: Trajet()
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajetcompose>" << endl;
   #endif
 
-  trajets = &lestrajets;
+  trajets = new ListeTrajets();
 }
 
 Trajetcompose::~Trajetcompose ( )
@@ -88,6 +107,8 @@ Trajetcompose::~Trajetcompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Trajetcompose>" << endl;
 #endif
+
+delete trajets;
 
 } //----- Fin de ~Trajetcompose
 

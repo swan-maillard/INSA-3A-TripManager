@@ -18,6 +18,8 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "ListeTrajets.h"
 #include "ElementListe.h"
+#include "Trajet.h"
+#include "Iterator.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -50,7 +52,7 @@ ListeTrajets::~ListeTrajets () {
     delete currentElement;
     currentElement = next;
   }
-} //----- Fin de ~ListeTrajets
+}
 
 void ListeTrajets::AddTrajetQueue(Trajet & trajet) {
   #ifdef MAP
@@ -99,28 +101,25 @@ void ListeTrajets::AddTrajetAlpha(Trajet & trajet) {
   size++;
 }
 
-ElementListe * ListeTrajets::GetStart() {
-  #ifdef MAP
-      cout << "Appel au GetStart de <ListeTrajets>" << endl;
-  #endif
-
-  return start;
+Trajet * ListeTrajets::GetFirstTrajet() const {
+  return start->getTrajet();
 }
 
-ElementListe * ListeTrajets::GetEnd() {
-  #ifdef MAP
-      cout << "Appel au GetEnd de <ListeTrajets>" << endl;
-  #endif
-
-  return end;
+Trajet * ListeTrajets::GetLastTrajet() const {
+  return end->getTrajet();
 }
 
-int ListeTrajets::GetSize() {
+int ListeTrajets::GetSize() const {
   #ifdef MAP
       cout << "Appel au GetSize de <ListeTrajets>" << endl;
   #endif
 
   return size;
+}
+
+Iterator * ListeTrajets::GetIterator() const {
+  Iterator * iterator = new Iterator(start);
+  return iterator;
 }
 
 

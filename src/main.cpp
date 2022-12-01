@@ -7,6 +7,14 @@ using namespace std;
 #include "Catalogue.h"
 #include "Trajetcompose.h"
 
+// A faire :
+// - Ajout d'un trajet composé
+// - Formatage des string
+// - Recherche d'un trajet
+// - Renommer les méthodes / attributs
+// - Réordonner le main
+// - Revoir tous les const
+
 int main() {
 
   int choice;
@@ -19,20 +27,19 @@ int main() {
   Trajetsimple sous1tc("Bron","Villeurbanne","Avion");
   Trajetsimple sous2tc("Villeurbanne","Cabourg","Bateau");
 
-  ListeTrajets listetc1;
-  listetc1.AddTrajetQueue(sous1tc);
-  listetc1.AddTrajetQueue(sous2tc);
-  Trajetcompose tc1(listetc1);
+  Trajetcompose tc1;
+  tc1.Add(sous1tc);
+  tc1.Add(sous2tc);
+
 
   Trajetsimple sous1tc2("Marseille","Toulon","Bateau");
   Trajetsimple sous2tc2("Toulon","Toulouse","Bateau");
   Trajetsimple sous3tc2("Toulouse","Aix-En-Provence","Voiture");
 
-  ListeTrajets listetc2;
-  listetc2.AddTrajetQueue(sous1tc2);
-  listetc2.AddTrajetQueue(sous2tc2);
-  listetc2.AddTrajetQueue(sous3tc2);
-  Trajetcompose tc2(listetc2);
+  Trajetcompose tc2;
+  tc2.Add(sous1tc2);
+  tc2.Add(sous2tc2);
+  tc2.Add(sous3tc2);
 
   catalogue.AddTrajet(ts1);
   catalogue.AddTrajet(ts2);
@@ -40,6 +47,7 @@ int main() {
   catalogue.AddTrajet(ts4);
   catalogue.AddTrajet(tc1);
   catalogue.AddTrajet(tc2);
+
 
   do {
     cout << "Grand Catalogue :" << endl;
@@ -64,6 +72,51 @@ int main() {
       case 2: // Recherche
         break;
       case 3: // Ajout
+        int typeTrajet, loop;
+        do {
+          loop = 0;
+
+          cout << "Quel type de trajet souhaitez-vous ajouter ?" << endl;
+          cout << " 1 - Trajet simple" << endl;
+          cout << " 2 - Trajet composé" << endl;
+          cout << " 3 - Revenir" << endl;
+          cin >> typeTrajet;
+
+          if (!cin) {
+            typeTrajet = -1;
+            cin.clear();
+            cin.ignore();
+          }
+
+          cout << endl;
+
+          Trajetsimple * ts[100];
+
+          switch (typeTrajet) {
+            case 1:
+              char depart[50], arrivee[50], transport[50];
+              cout << "Veuillez remplir les informations suivantes :" << endl;
+              cout << "Ville de départ : ";
+              cin >> depart;
+              cout << "Ville d'arrivée : ";
+              cin >> arrivee;
+              cout << "Moyen de transport : ";
+              cin >> transport;
+
+              ts[0] = new Trajetsimple(depart, arrivee, transport);
+              catalogue.AddTrajet(*ts[0]);
+              break;
+            case 2:
+              break;
+            case 4:
+              break;
+            default:
+              loop = 1;
+              cout << "Veuillez choisir une option parmi celles proposées !" << endl;
+          }
+
+        } while (loop);
+
         break;
       case 4: // Fin
         cout << "A bientôt dans notre grand catalogue !" << endl;
@@ -75,8 +128,6 @@ int main() {
     cout << endl;
 
   } while (choice != 4);
-
-
 
   return EXIT_SUCCESS;
 }

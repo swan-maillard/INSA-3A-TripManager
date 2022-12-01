@@ -35,7 +35,9 @@ public:
     // Contrat :
     //
     void Affichage() const;
-    char* getTransport() const;
+    const char* getTransport() const;
+    const char* getStart() const;
+    const char* getEnd() const;
 
 
 
@@ -56,7 +58,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-char* transport;
+const char* depart;
+const char* arrivee;
+const char* transport;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajetsimple>

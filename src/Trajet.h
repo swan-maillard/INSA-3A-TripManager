@@ -34,28 +34,18 @@ public:
     // Contrat :
     //
 
-    virtual void Affichage() const;
-    virtual char* getStart() const;
-    virtual char* getEnd() const;
+    virtual void Affichage() const = 0;
+    virtual const char* getStart() const = 0;
+    virtual const char* getEnd() const = 0;
 
-    Trajet (const char* depart, const char* arrivee );
-    // Mode d'emploi :
-    //
-    // Contrat :
+    Trajet ();
     virtual ~Trajet ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
-char* depart;
-char* arrivee;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajet>

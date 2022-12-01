@@ -37,13 +37,14 @@ public:
     // Contrat :
     //
     void Affichage() const;
+    const char* getStart() const;
+    const char* getEnd() const;
     int getNbTrajets() const;
     ListeTrajets * getTrajets() const;
     void addTrajets(Trajet & trajet);
+    void Add(Trajet& trajet);
 
-
-//-------------------------------------------- Constructeurs - destructeur
-    Trajetcompose (ListeTrajets & lestrajets); //a modifier pour enlever départ et arrivée (mais ça faisait des pb)
+    Trajetcompose (); //a modifier pour enlever départ et arrivée (mais ça faisait des pb)
 
     virtual ~Trajetcompose ( );
 //------------------------------------------------------------------ PRIVE

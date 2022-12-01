@@ -48,14 +48,14 @@ void Catalogue::Afficher() const {
       cout << "Appel à Afficher de <Catalogue>" << endl;
   #endif
 
-  ElementListe * currentElement = GetStart();
-
+  Iterator * trajetIterator = trajets->GetIterator();
+  Trajet * currentTrajet;
   cout << "Notre catalogue propose " << GetNbTrajets() << " trajets :" << endl;
-  while (currentElement != NULL) {
+  while ((currentTrajet = trajetIterator->Next()) != NULL) {
     cout << "- ";
-    currentElement->getTrajet()->Affichage();
-    currentElement = currentElement->getNext();
+    currentTrajet->Affichage();
   }
+  delete trajetIterator;
 }
 
 int Catalogue::GetNbTrajets() const {
@@ -64,14 +64,6 @@ int Catalogue::GetNbTrajets() const {
   #endif
 
   return trajets->GetSize();
-}
-
-ElementListe * Catalogue::GetStart() const {
-  #ifdef MAP
-      cout << "Appel à GetStart de <Catalogue>" << endl;
-  #endif
-
-  return trajets->GetStart();
 }
 
 void Catalogue::AddTrajet(Trajet & trajet) {
