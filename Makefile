@@ -1,52 +1,62 @@
 #Outils
-CXX=g++
-LD=g++
-RM=rm
-ECHO=echo
+CXX		:=	g++
+LD		:= 	g++
+RM		:= 	rm
+ECHO	:= 	echo
+MKDIR	:= 	mkdir
 
 #Options
-CXXFLAGS=-ansi -pedantic -Wall -std=c++11 -g
-DEVFLAGS=-DMAP
-RMFLAGS=-rf
+CXXFLAGS		:= 	-ansi -pedantic -Wall -std=c++11 -g
+DEVFLAGS		:= 	-DMAP
+RMFLAGS			:= 	-rf
 
 #Fichiers
-CLASS_DIR=src
-OBJ_DIR=objects
-SRC=$(wildcard $(CLASS_DIR)/*.cpp)
-OBJ=$(SRC:.cpp=.o)
-LIBS=
+EXECUTABLE	:= 	app
+SRC_DIR			:= 	src/
+OBJ_DIR			:= 	bin/
+SRC					:= 	$(wildcard $(SRC_DIR)*.cpp)
+OBJ					:= 	$(SRC:${SRC_DIR}%.cpp=$(OBJ_DIR)%.o)
 
-#Cibles speciales
-EXE=out
-RUN=run
-BUILD=build
-DEV=dev
-CLEAN=clean
-.PHONY: $(CLEAN) $(RUN) $(BUILD)
 
 #Cibles
-$(EXE): $(OBJ)
-	@$(ECHO) [MAKE] Edition des liens
+.PHONY: all run dev clean info help
+
+all: $(EXECUTABLE)
+
+run: all
+	@./$(EXECUTABLE)
+
+dev: CXXFLAGS+=$(DEVFLAGS)
+dev: clean all
+	@$(ECHO) [MAKE] -- MODE DEVELOPPEMENT --
+
+clean:
+	@$(ECHO) [MAKE] Suppression du dossier $(OBJ_DIR) et de $(EXECUTABLE)
+	@$(RM) $(RMFLAGS) $(EXECUTABLE) $(OBJ_DIR)
+
+help:
+	@$(ECHO) "[*] make         Compilation et édition des liens"
+	@$(ECHO) "[*] make dev     Compilation en mode développement et édition des liens"
+	@$(ECHO) "[*] make run     Compilation, édition des liens et exécution du programme"
+	@$(ECHO) "[*] make clean   Suppression des fichiers objets et de l'exécutable"
+	@$(ECHO) "[*] make info    Informations sur les fichiers"
+
+info:
+	@$(ECHO) "[*] Exécutable:      ${EXECUTABLE}"
+	@$(ECHO) "[*] Dossier sources: ${SRC_DIR}"
+	@$(ECHO) "[*] Dossier objets:  ${OBJ_DIR}"
+	@$(ECHO) "[*] Sources:         ${SRC:${SRC_DIR}%=%}"
+	@$(ECHO) "[*] Objets:          ${OBJ:${OBJ_DIR}%=%}"
+
+
+$(EXECUTABLE): $(OBJ)
+	@$(ECHO) [MAKE] Création de l\'exécutable $(EXECUTABLE)
 	@$(LD) $^ -o $@ $(LIBS)
 
-$(RUN): $(EXE)
-	@./$(EXE)
-
-$(BUILD): $(CLEAN) $(EXE)
-	@$(ECHO) [MAKE] Mode standard
-
-$(DEV): CXXFLAGS+=$(DEVFLAGS)
-$(DEV): $(CLEAN) $(EXE)
-	@$(ECHO) [MAKE] Mode développement
-
-$(CLEAN):
-	@$(ECHO) [MAKE] Suppression des fichiers compilés et de $(EXE)
-	@$(RM) $(RMFLAGS) $(EXE) $(OBJ)
-
-
-#Dependances complementaires
-
-#Regles d'inference
-%.o: %.cpp
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp | $(OBJ_DIR)
 	@$(ECHO) [MAKE] Compilation de $<
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	@$(ECHO) [MAKE] Création du fichier $(OBJ_DIR)
+	@$(MKDIR) -p $@

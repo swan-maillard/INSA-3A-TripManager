@@ -16,8 +16,8 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "ElementListe.h"
-#include "Trajet.h"
+#include "../include/ElementListe.h"
+#include "../include/Trajet.h"
 
 //------------------------------------------------------------- Constantes
 

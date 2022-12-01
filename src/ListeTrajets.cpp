@@ -16,10 +16,10 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "ListeTrajets.h"
-#include "ElementListe.h"
-#include "Trajet.h"
-#include "Iterator.h"
+#include "../include/ListeTrajets.h"
+#include "../include/ElementListe.h"
+#include "../include/Trajet.h"
+#include "../include/Iterator.h"
 
 //------------------------------------------------------------- Constantes
 

@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-#include "Trajet.h"
-#include "Trajetsimple.h"
-#include "ListeTrajets.h"
-#include "Catalogue.h"
-#include "Trajetcompose.h"
+#include "../include/Trajet.h"
+#include "../include/Trajetsimple.h"
+#include "../include/ListeTrajets.h"
+#include "../include/Catalogue.h"
+#include "../include/Trajetcompose.h"
 
 // A faire :
 // - Ajout d'un trajet composé

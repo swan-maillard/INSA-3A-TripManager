@@ -3,7 +3,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Trajet.h"
+#include "../include/Trajet.h"
 
 
 Trajet::Trajet () {

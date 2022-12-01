@@ -1,39 +1,9 @@
-/*************************************************************************
-                           Catalogue  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
 #include <iostream>
 #include <cstring>
 using namespace std;
 
-//------------------------------------------------------ Include personnel
-#include "Catalogue.h"
-#include "ListeTrajets.h"
-
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-// type Catalogue::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
-
-
-//-------------------------------------------- Constructeurs - destructeur
-
+#include "../include/Catalogue.h"
+#include "../include/ListeTrajets.h"
 
 Catalogue::Catalogue () {
   #ifdef MAP
@@ -83,8 +53,3 @@ Catalogue::~Catalogue () {
   delete trajets;
 
 }
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
