@@ -19,18 +19,22 @@ OBJ					:= 	$(SRC:${SRC_DIR}%.cpp=$(OBJ_DIR)%.o)
 
 
 #Cibles
-.PHONY: all run dev clean info help
+.PHONY: all dev run clean fclean info help
 
 all: $(EXECUTABLE)
-
-run: all
-	@./$(EXECUTABLE)
 
 dev: CXXFLAGS+=$(DEVFLAGS)
 dev: clean all
 	@$(ECHO) [MAKE] -- MODE DEVELOPPEMENT --
 
+run: all
+	@./$(EXECUTABLE)
+
 clean:
+	@$(ECHO) [MAKE] Suppression du dossier $(OBJ_DIR)
+	@$(RM) $(RMFLAGS) $(OBJ_DIR)
+
+fclean:
 	@$(ECHO) [MAKE] Suppression du dossier $(OBJ_DIR) et de $(EXECUTABLE)
 	@$(RM) $(RMFLAGS) $(EXECUTABLE) $(OBJ_DIR)
 
@@ -38,7 +42,8 @@ help:
 	@$(ECHO) "[*] make         Compilation et édition des liens"
 	@$(ECHO) "[*] make dev     Compilation en mode développement et édition des liens"
 	@$(ECHO) "[*] make run     Compilation, édition des liens et exécution du programme"
-	@$(ECHO) "[*] make clean   Suppression des fichiers objets et de l'exécutable"
+	@$(ECHO) "[*] make clean   Suppression des fichiers objets"
+	@$(ECHO) "[*] make fclean  Suppression des fichiers objets et de l'exécutable"
 	@$(ECHO) "[*] make info    Informations sur les fichiers"
 
 info:
