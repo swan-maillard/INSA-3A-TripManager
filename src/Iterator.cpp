@@ -1,21 +1,8 @@
-/*************************************************************************
-                           Iterator  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <Iterator> (fichier Iterator.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
-#include <iostream>
-#include <cstring>
 using namespace std;
 
-//------------------------------------------------------ Include personnel
+#include <iostream>
+#include <cstring>
+
 #include "../include/Iterator.h"
 
 
@@ -34,18 +21,13 @@ Iterator::~Iterator() {
   #endif
 }
 
-Trajet * Iterator::Next() {
-  Trajet * currentTrajet = NULL;
+const Trajet * Iterator::Next() {
+  const Trajet * currentTrajet = NULL;
 
   if (currentElement != NULL) {
-    currentTrajet = currentElement->getTrajet();
-    currentElement = currentElement->getNext();
+    currentTrajet = currentElement->GetTrajet();
+    currentElement = currentElement->GetNext();
   }
 
   return currentTrajet;
 }
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

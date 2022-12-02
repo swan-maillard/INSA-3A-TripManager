@@ -1,49 +1,65 @@
-/*************************************************************************
-                           Trajetsimple  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <Trajetsimple> (fichier Trajetsimple.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
-#include <iostream>
-#include <cstring>
 using namespace std;
 
-//------------------------------------------------------ Include personnel
+#include <iostream>
+#include <cstring>
 
 #include "../include/Trajetsimple.h"
 
 
-//------------------------------------------------------------- Constantes
+Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, const char* transport): Trajet() {
+  #ifdef MAP
+      cout << "Appel au constructeur de <Trajetsimple>" << endl;
+  #endif
 
-//----------------------------------------------------------------- PUBLIC
+  char * depart_copy = new char(strlen(depart));
+  strcpy(depart_copy, depart);
+  this->depart = depart_copy;
 
-//----------------------------------------------------- Méthodes publiques
-// type Trajetsimple::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+  char * arrivee_copy = new char(strlen(arrivee));
+  strcpy(arrivee_copy, arrivee);
+  this->arrivee = arrivee_copy;
 
-void Trajetsimple::Affichage() const {
-  cout << getStart() << " à " << getEnd() << " en " << transport << endl;
+  char * transport_copy = new char(strlen(transport));
+  strcpy(transport_copy, transport);
+  this->transport = transport_copy;
+}
+
+Trajetsimple::Trajetsimple(const Trajetsimple & trajet): Trajetsimple(trajet.depart, trajet.arrivee, trajet.transport) {
+  #ifdef MAP
+      cout << "Appel au constructeur de copie de <Trajetsimple>" << endl;
+  #endif
+}
+
+const Trajetsimple * Trajetsimple::copy() const {
+  return new Trajetsimple(*this);
+}
+
+Trajetsimple::~Trajetsimple () {
+  #ifdef MAP
+      cout << "Appel au destructeur de <Trajetsimple>" << endl;
+  #endif
+
+  delete [] depart;
+  delete [] arrivee;
+  delete [] transport;
 }
 
 
-const char* Trajetsimple::getTransport() const{
+void Trajetsimple::Affichage() const {
+  cout << GetStart() << " à " << GetEnd() << " en " << transport << endl;
+}
+
+
+const char* Trajetsimple::GetTransport() const{
   #ifdef MAP
       cout << "Appel au Get Transport du Trajet" << endl;
   #endif
+
   return transport;
 }
 
-const char* Trajetsimple::getStart() const{
+
+const char* Trajetsimple::GetStart() const{
   #ifdef MAP
       cout << "Appel au Get Transport du Trajet" << endl;
   #endif
@@ -51,36 +67,11 @@ const char* Trajetsimple::getStart() const{
   return depart;
 }
 
-const char* Trajetsimple::getEnd() const{
+
+const char* Trajetsimple::GetEnd() const{
   #ifdef MAP
       cout << "Appel au Get Transport du Trajet" << endl;
   #endif
 
   return arrivee;
 }
-
-//-------------------------------------------- Constructeurs - destructeur
-
-
-Trajetsimple::Trajetsimple(const char* depart, const char* arrivee, const char* letransport)
-: Trajet()
-{
-  #ifdef MAP
-      cout << "Appel au constructeur de <Trajetsimple>" << endl;
-  #endif
-
-  this->depart = depart;
-  this->arrivee = arrivee;
-  transport = letransport;
-}
-
-Trajetsimple::~Trajetsimple ( ) {
-  #ifdef MAP
-      cout << "Appel au destructeur de <Trajetsimple>" << endl;
-  #endif
-} //----- Fin de ~Trajetsimple
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

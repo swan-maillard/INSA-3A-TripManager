@@ -1,43 +1,21 @@
-/*************************************************************************
-                           ElementListe  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <ElementListe> (fichier ElementListe.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
-#include <iostream>
-#include <cstring>
 using namespace std;
 
-//------------------------------------------------------ Include personnel
+#include <iostream>
+#include <cstring>
+
 #include "../include/ElementListe.h"
 #include "../include/Trajet.h"
 
-//------------------------------------------------------------- Constantes
 
-//----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-// type ElementListe::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
-ElementListe::ElementListe (Trajet & trajet) {
+ElementListe::ElementListe (const Trajet & trajet) {
   #ifdef MAP
       cout << "Appel au constructeur de <ElementListe>" << endl;
   #endif
 
-  this->trajet = &trajet;
+  this->trajet = trajet.copy();
   this->next = NULL;
 }
+
 
 void ElementListe::AddNext(ElementListe * element) {
   #ifdef MAP
@@ -52,17 +30,19 @@ void ElementListe::AddNext(ElementListe * element) {
   this->next = element;
 }
 
-Trajet* ElementListe::getTrajet() const {
+
+const Trajet* ElementListe::GetTrajet() const {
   #ifdef MAP
-      cout << "Appel au getTrajet de <ElementListe>" << endl;
+      cout << "Appel au GetTrajet de <ElementListe>" << endl;
   #endif
 
   return trajet;
 }
 
-ElementListe* ElementListe::getNext() const {
+
+ElementListe* ElementListe::GetNext() const {
   #ifdef MAP
-      cout << "Appel au getNext de <ElementListe>" << endl;
+      cout << "Appel au GetNext de <ElementListe>" << endl;
   #endif
 
   return next;
@@ -70,12 +50,9 @@ ElementListe* ElementListe::getNext() const {
 
 
 ElementListe::~ElementListe () {
-#ifdef MAP
-    cout << "Appel au destructeur de <ElementListe>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au destructeur de <ElementListe>" << endl;
+  #endif
+
+  delete trajet;
 }
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

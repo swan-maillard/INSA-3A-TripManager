@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 #include "../include/Trajet.h"
@@ -19,35 +20,9 @@ int main() {
 
   int choice;
   Catalogue catalogue;
-  Trajetsimple ts1("Annecy","Limoges","Voiture");
-  Trajetsimple ts2("Brest","Carcassonne","Voiture");
-  Trajetsimple ts3("Paris", "Epinal", "Bateau");
-  Trajetsimple ts4("Epinal", "Carcassonne", "Avion");
 
-  Trajetsimple sous1tc("Bron","Villeurbanne","Avion");
-  Trajetsimple sous2tc("Villeurbanne","Cabourg","Bateau");
-
-  Trajetcompose tc1;
-  tc1.Add(sous1tc);
-  tc1.Add(sous2tc);
-
-
-  Trajetsimple sous1tc2("Marseille","Toulon","Bateau");
-  Trajetsimple sous2tc2("Toulon","Toulouse","Bateau");
-  Trajetsimple sous3tc2("Toulouse","Aix-En-Provence","Voiture");
-
-  Trajetcompose tc2;
-  tc2.Add(sous1tc2);
-  tc2.Add(sous2tc2);
-  tc2.Add(sous3tc2);
-
-  catalogue.AddTrajet(ts1);
-  catalogue.AddTrajet(ts2);
-  catalogue.AddTrajet(ts3);
-  catalogue.AddTrajet(ts4);
-  catalogue.AddTrajet(tc1);
-  catalogue.AddTrajet(tc2);
-
+  Trajetsimple t("Jouy", "Vernon", "Moto");
+  catalogue.AddTrajet(t);
 
   do {
     cout << "Grand Catalogue :" << endl;
@@ -90,11 +65,10 @@ int main() {
 
           cout << endl;
 
-          Trajetsimple * ts[100];
-
+          char depart[50], arrivee[50], transport[50];
+          Trajetcompose tc;
           switch (typeTrajet) {
             case 1:
-              char depart[50], arrivee[50], transport[50];
               cout << "Veuillez remplir les informations suivantes :" << endl;
               cout << "Ville de départ : ";
               cin >> depart;
@@ -103,10 +77,49 @@ int main() {
               cout << "Moyen de transport : ";
               cin >> transport;
 
-              ts[0] = new Trajetsimple(depart, arrivee, transport);
-              catalogue.AddTrajet(*ts[0]);
+              catalogue.AddTrajet(Trajetsimple(depart, arrivee, transport));
               break;
             case 2:
+              int nbTrajets;
+              do {
+                nbTrajets = 0;
+                cout << "Combien d'étapes ce trajet comporte-t-il ?" << endl;
+                cin >> nbTrajets;
+                nbTrajets++;
+
+                if (!cin) {
+                  nbTrajets = 0;
+                  cin.clear();
+                  cin.ignore();
+                }
+
+                cout <<endl;
+
+                if (nbTrajets <= 1)
+                  cout << "Un trajet composé doit au moins comporter une étape." << endl;
+              } while (nbTrajets <= 1);
+
+              cout << "Veuillez remplir les informations suivantes :" << endl;
+              for (int i=0; i<nbTrajets; i++) {
+                if (i == 0) {
+                  cout << "Ville de départ : ";
+                  cin >> depart;
+                }
+
+                if (i == nbTrajets-1)
+                  cout << "Ville d'arrivée : ";
+                else
+                  cout << "Ville à l'étape " << i+1 << " : ";
+                cin >> arrivee;
+
+                cout << "Moyen de transport sur cette étape : ";
+                cin >> transport;
+
+                strcpy(depart, arrivee);
+                tc.Add(Trajetsimple(depart, arrivee, transport));
+              }
+              catalogue.AddTrajet(tc);
+
               break;
             case 4:
               break;

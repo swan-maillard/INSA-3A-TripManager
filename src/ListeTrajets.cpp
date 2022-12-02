@@ -1,36 +1,14 @@
-/*************************************************************************
-                           ListeTrajets  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
-//---------- Réalisation de la classe <ListeTrajets> (fichier ListeTrajets.cpp) ------------
-
-//---------------------------------------------------------------- INCLUDE
-
-//-------------------------------------------------------- Include système
-#include <iostream>
-#include <cstring>
 using namespace std;
 
-//------------------------------------------------------ Include personnel
+#include <iostream>
+#include <cstring>
+
 #include "../include/ListeTrajets.h"
 #include "../include/ElementListe.h"
 #include "../include/Trajet.h"
 #include "../include/Iterator.h"
 
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-
-//-------------------------------------------- Constructeurs - destructeur
-
-
-ListeTrajets::ListeTrajets () {
+ListeTrajets::ListeTrajets() {
   #ifdef MAP
       cout << "Appel au constructeur de <ListeTrajets>" << endl;
   #endif
@@ -41,20 +19,21 @@ ListeTrajets::ListeTrajets () {
 }
 
 
-ListeTrajets::~ListeTrajets () {
+ListeTrajets::~ListeTrajets() {
   #ifdef MAP
       cout << "Appel au destructeur de <ListeTrajets>" << endl;
   #endif
 
   ElementListe * currentElement = start;
   while (currentElement != NULL) {
-    ElementListe * next = currentElement->getNext();
+    ElementListe * next = currentElement->GetNext();
     delete currentElement;
     currentElement = next;
   }
 }
 
-void ListeTrajets::AddTrajetQueue(Trajet & trajet) {
+
+void ListeTrajets::AddTrajetQueue(const Trajet & trajet) {
   #ifdef MAP
       cout << "Appel au AddTrajetQueue de <ListeTrajets>" << endl;
   #endif
@@ -70,7 +49,8 @@ void ListeTrajets::AddTrajetQueue(Trajet & trajet) {
   size++;
 }
 
-void ListeTrajets::AddTrajetAlpha(Trajet & trajet) {
+
+void ListeTrajets::AddTrajetAlpha(const Trajet & trajet) {
   #ifdef MAP
       cout << "Appel au AddTrajetAlpha de <ListeTrajets>" << endl;
   #endif
@@ -79,20 +59,20 @@ void ListeTrajets::AddTrajetAlpha(Trajet & trajet) {
   if (start == NULL) {
     start = end = newElement;
   }
-  else if (strcmp(trajet.getEnd(), start->getTrajet()->getEnd()) < 0) {
+  else if (strcmp(trajet.GetEnd(), GetFirstTrajet()->GetEnd()) < 0) {
     newElement->AddNext(start);
     start = newElement;
   }
-  else if (strcmp(trajet.getEnd(), end->getTrajet()->getEnd()) >= 0) {
+  else if (strcmp(trajet.GetEnd(), GetLastTrajet()->GetEnd()) >= 0) {
     end->AddNext(newElement);
     end = newElement;
   }
   else {
     ElementListe * previousElement = start;
-    ElementListe * currentElement = start->getNext();
-    while (strcmp(trajet.getEnd(), currentElement->getTrajet()->getEnd()) >= 0) {
+    ElementListe * currentElement = start->GetNext();
+    while (strcmp(trajet.GetEnd(), currentElement->GetTrajet()->GetEnd()) >= 0) {
       previousElement = currentElement;
-      currentElement = currentElement->getNext();
+      currentElement = currentElement->GetNext();
     }
     newElement->AddNext(currentElement);
     previousElement->AddNext(newElement);
@@ -101,13 +81,16 @@ void ListeTrajets::AddTrajetAlpha(Trajet & trajet) {
   size++;
 }
 
-Trajet * ListeTrajets::GetFirstTrajet() const {
-  return start->getTrajet();
+
+const Trajet * ListeTrajets::GetFirstTrajet() const {
+  return start->GetTrajet();
 }
 
-Trajet * ListeTrajets::GetLastTrajet() const {
-  return end->getTrajet();
+
+const Trajet * ListeTrajets::GetLastTrajet() const {
+  return end->GetTrajet();
 }
+
 
 int ListeTrajets::GetSize() const {
   #ifdef MAP
@@ -117,12 +100,8 @@ int ListeTrajets::GetSize() const {
   return size;
 }
 
+
 Iterator * ListeTrajets::GetIterator() const {
   Iterator * iterator = new Iterator(start);
   return iterator;
 }
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

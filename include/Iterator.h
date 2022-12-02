@@ -1,50 +1,22 @@
-/*************************************************************************
-                           Iterator  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
+#if ! defined (ITERATOR_H)
+#define ITERATOR_H
 
-//---------- Interface de la classe <Iterator> (fichier Iterator.h) ----------------
-#if ! defined (ITERATOR)
-#define ITERATOR
 #include "Iterator.h"
 #include "ElementListe.h"
 #include "Trajet.h"
 
-//--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
-//------------------------------------------------------------------------
-// Rôle de la classe <Iterator>
-//
-//
-//------------------------------------------------------------------------
 
 class Iterator {
-//----------------------------------------------------------------- PUBLIC
 
-public:
-
+  public:
     Iterator(const ElementListe * element);
     virtual ~Iterator();
-    Trajet * Next();
+    const Trajet * Next();
 
-//------------------------------------------------------------------ PRIVE
 
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-//----------------------------------------------------- Attributs protégés
-
-const ElementListe * currentElement;
+  protected:
+    const ElementListe * currentElement;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Iterator>
-
-#endif // ITERATOR
+#endif // ITERATOR_H

@@ -19,7 +19,8 @@ void Catalogue::Afficher() const {
   #endif
 
   Iterator * trajetIterator = trajets->GetIterator();
-  Trajet * currentTrajet;
+  const Trajet * currentTrajet;
+
   cout << "Notre catalogue propose " << GetNbTrajets() << " trajets :" << endl;
   while ((currentTrajet = trajetIterator->Next()) != NULL) {
     cout << "- ";
@@ -36,7 +37,7 @@ int Catalogue::GetNbTrajets() const {
   return trajets->GetSize();
 }
 
-void Catalogue::AddTrajet(Trajet & trajet) {
+void Catalogue::AddTrajet(const Trajet & trajet) {
   #ifdef MAP
       cout << "Appel à AddTrajet de <Catalogue>" << endl;
   #endif
@@ -46,10 +47,9 @@ void Catalogue::AddTrajet(Trajet & trajet) {
 
 
 Catalogue::~Catalogue () {
-#ifdef MAP
-    cout << "Appel au destructeur de <Catalogue>" << endl;
-#endif
+  #ifdef MAP
+      cout << "Appel au destructeur de <Catalogue>" << endl;
+  #endif
 
   delete trajets;
-
 }
