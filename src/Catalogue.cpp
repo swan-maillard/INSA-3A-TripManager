@@ -10,18 +10,20 @@ Catalogue::Catalogue () {
       cout << "Appel au constructeur de <Catalogue>" << endl;
   #endif
 
-  trajets = new ListeTrajets();
+  trajets = NULL;
 }
 
 void Catalogue::Afficher() const {
-  #ifdef MAP
-      cout << "Appel à Afficher de <Catalogue>" << endl;
-  #endif
+  if (trajets == NULL) {
+    cout << "Notre catalogue est pour l'instant vide mais vous pouvez nous aider à le remplir !" << endl;
+    return;
+  }
 
-  Iterator * trajetIterator = trajets->GetIterator();
+  Iterator * trajetIterator = trajets->CreateIterator();
   const Trajet * currentTrajet;
 
   cout << "Notre catalogue propose " << GetNbTrajets() << " trajets :" << endl;
+
   while ((currentTrajet = trajetIterator->Next()) != NULL) {
     cout << "- ";
     currentTrajet->Affichage();
@@ -30,19 +32,48 @@ void Catalogue::Afficher() const {
 }
 
 int Catalogue::GetNbTrajets() const {
-  #ifdef MAP
-      cout << "Appel à GetNbTrajets de <Catalogue>" << endl;
-  #endif
+  if (trajets == NULL)
+    return 0;
 
   return trajets->GetSize();
 }
 
 void Catalogue::AddTrajet(const Trajet & trajet) {
-  #ifdef MAP
-      cout << "Appel à AddTrajet de <Catalogue>" << endl;
-  #endif
+  if (trajets == NULL)
+    trajets = new ListeTrajets();
 
   trajets->AddTrajetAlpha(trajet);
+}
+
+void Catalogue::SearchTrajets(const char * depart, const char * arrivee) {
+  if (trajets == NULL) {
+    cout << "Le catalogue ne contient aucun trajet" << endl;
+    return;
+  }
+
+  Iterator * iterator = trajets->CreateIterator();
+  const Trajet * currentTrajet;
+  ListeTrajets trajetsFound;
+
+  while ((currentTrajet = iterator->Next()) != NULL) {
+    if (strcmp(currentTrajet->GetStart(), depart) == 0 && strcmp(currentTrajet->GetEnd(), arrivee) == 0) {
+      trajetsFound.AddTrajetQueue(*currentTrajet);
+    }
+  }
+  delete iterator;
+
+
+  if (trajetsFound.GetSize() == 0)
+    cout << "Aucun trajet allant de " << depart << " à " << arrivee << " n'a été trouvé..." << endl;
+  else
+    cout << trajetsFound.GetSize() << " trajet(s) allant de " << depart << " à " << arrivee << " ont été trouvé(s) :" << endl;
+
+  iterator = trajetsFound.CreateIterator();
+  while ((currentTrajet = iterator->Next()) != NULL) {
+    cout << "- ";
+    currentTrajet->Affichage();
+  }
+  delete iterator;
 }
 
 

@@ -14,8 +14,26 @@ ListeTrajets::ListeTrajets() {
   #endif
 
   size = 0;
-  start = NULL;
-  end = NULL;
+  start = end = NULL;
+}
+
+ListeTrajets::ListeTrajets(const ListeTrajets * trajets) {
+  #ifdef MAP
+      cout << "Appel au constructeur de copie <ListeTrajets>" << endl;
+  #endif
+
+  size = trajets->size;
+
+  if (trajets->start == NULL) {
+    start = end = NULL;
+  }
+  else {
+    start = new ElementListe(trajets->start);
+    if (trajets->start == trajets->end)
+      end = start;
+    else
+      end = new ElementListe(trajets->end);
+  }
 }
 
 
@@ -34,13 +52,11 @@ ListeTrajets::~ListeTrajets() {
 
 
 void ListeTrajets::AddTrajetQueue(const Trajet & trajet) {
-  #ifdef MAP
-      cout << "Appel au AddTrajetQueue de <ListeTrajets>" << endl;
-  #endif
-
   ElementListe * newElement = new ElementListe(trajet);
-  if (start == NULL)
+
+  if (start == NULL) {
     start = end = newElement;
+  }
   else {
     end->AddNext(newElement);
     end = newElement;
@@ -51,11 +67,8 @@ void ListeTrajets::AddTrajetQueue(const Trajet & trajet) {
 
 
 void ListeTrajets::AddTrajetAlpha(const Trajet & trajet) {
-  #ifdef MAP
-      cout << "Appel au AddTrajetAlpha de <ListeTrajets>" << endl;
-  #endif
-
   ElementListe * newElement = new ElementListe(trajet);
+
   if (start == NULL) {
     start = end = newElement;
   }
@@ -83,25 +96,27 @@ void ListeTrajets::AddTrajetAlpha(const Trajet & trajet) {
 
 
 const Trajet * ListeTrajets::GetFirstTrajet() const {
+  if (start == NULL)
+    return NULL;
+
   return start->GetTrajet();
 }
 
 
 const Trajet * ListeTrajets::GetLastTrajet() const {
+  if (end == NULL)
+    return NULL;
+
   return end->GetTrajet();
 }
 
 
 int ListeTrajets::GetSize() const {
-  #ifdef MAP
-      cout << "Appel au GetSize de <ListeTrajets>" << endl;
-  #endif
-
   return size;
 }
 
 
-Iterator * ListeTrajets::GetIterator() const {
+Iterator * ListeTrajets::CreateIterator() const {
   Iterator * iterator = new Iterator(start);
   return iterator;
 }

@@ -16,12 +16,17 @@ ElementListe::ElementListe (const Trajet & trajet) {
   this->next = NULL;
 }
 
-
-void ElementListe::AddNext(ElementListe * element) {
+ElementListe::ElementListe(const ElementListe * element) {
   #ifdef MAP
-      cout << "Appel au AddNext de <ElementListe>" << endl;
+      cout << "Appel au constructeur de copie <ElementListe>" << endl;
   #endif
 
+  this->trajet = element->trajet->copy();
+
+  this->next = (element->next == NULL ? NULL : new ElementListe(element->next));
+}
+
+void ElementListe::AddNext(ElementListe * element) {
   ElementListe * elementNext = element->next;
   while (elementNext != NULL)
     elementNext = elementNext->next;
@@ -32,19 +37,11 @@ void ElementListe::AddNext(ElementListe * element) {
 
 
 const Trajet* ElementListe::GetTrajet() const {
-  #ifdef MAP
-      cout << "Appel au GetTrajet de <ElementListe>" << endl;
-  #endif
-
   return trajet;
 }
 
 
 ElementListe* ElementListe::GetNext() const {
-  #ifdef MAP
-      cout << "Appel au GetNext de <ElementListe>" << endl;
-  #endif
-
   return next;
 }
 

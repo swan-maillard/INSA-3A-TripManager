@@ -21,8 +21,7 @@ int main() {
   int choice;
   Catalogue catalogue;
 
-  Trajetsimple t("Jouy", "Vernon", "Moto");
-  catalogue.AddTrajet(t);
+  catalogue.AddTrajet(Trajetsimple("Jouy", "Vernon", "Moto"));
 
   do {
     cout << "Grand Catalogue :" << endl;
@@ -45,6 +44,15 @@ int main() {
         catalogue.Afficher();
         break;
       case 2: // Recherche
+        char depart[50], arrivee[50];
+
+        cout << "Vous pouvez rechercher un trajet en renseignant la ville de départ et d'arrivée" << endl;
+        cout << "Ville de départ : ";
+        cin >> depart;
+        cout << "Ville d'arrivée : ";
+        cin >> arrivee;
+
+        catalogue.SearchTrajets(depart, arrivee);
         break;
       case 3: // Ajout
         int typeTrajet, loop;
@@ -115,8 +123,8 @@ int main() {
                 cout << "Moyen de transport sur cette étape : ";
                 cin >> transport;
 
-                strcpy(depart, arrivee);
                 tc.Add(Trajetsimple(depart, arrivee, transport));
+                strcpy(depart, arrivee);
               }
               catalogue.AddTrajet(tc);
 

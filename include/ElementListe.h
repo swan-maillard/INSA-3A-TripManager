@@ -7,7 +7,8 @@
 class ElementListe {
 
   public:
-    ElementListe (const Trajet & trajet);
+    ElementListe(const Trajet & trajet);
+    ElementListe(const ElementListe * element);
     void AddNext(ElementListe * element);
     const Trajet* GetTrajet() const;
     ElementListe* GetNext() const;

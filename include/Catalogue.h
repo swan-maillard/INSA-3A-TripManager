@@ -11,6 +11,7 @@ class Catalogue {
     void Afficher() const;
     int GetNbTrajets() const;
     void AddTrajet(const Trajet & trajet);
+    void SearchTrajets(const char * depart, const char * arrivee);
     virtual ~Catalogue ();
 
   protected:

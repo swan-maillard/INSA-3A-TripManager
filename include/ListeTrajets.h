@@ -9,13 +9,14 @@ class ListeTrajets {
 
   public:
     ListeTrajets();
+    ListeTrajets(const ListeTrajets * trajets);
     virtual ~ListeTrajets();
     void AddTrajetQueue(const Trajet & trajet);
     void AddTrajetAlpha(const Trajet & trajet);
     const Trajet * GetFirstTrajet() const;
     const Trajet * GetLastTrajet() const;
     int GetSize() const;
-    Iterator * GetIterator() const;
+    Iterator * CreateIterator() const;
 
   protected:
     ElementListe * start;
