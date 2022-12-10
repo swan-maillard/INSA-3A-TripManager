@@ -6,7 +6,7 @@ using namespace std;
 #include "../include/Iterator.h"
 
 
-Iterator::Iterator(const ElementListe * element) {
+Iterator::Iterator(const ElementTripList * element) {
   #ifdef MAP
       cout << "Appel au constructeur de <Iterator>" << endl;
   #endif
@@ -21,13 +21,13 @@ Iterator::~Iterator() {
   #endif
 }
 
-const Trajet * Iterator::Next() {
-  const Trajet * currentTrajet = NULL;
+const Trip * Iterator::Next() {
+  const Trip * currentTrip = NULL;
 
-  if (currentElement != NULL) {
-    currentTrajet = currentElement->GetTrajet();
+  if (currentTrip != NULL) {
+    currentTrip = currentElement->GetTrip();
     currentElement = currentElement->GetNext();
   }
 
-  return currentTrajet;
+  return currentTrip;
 }

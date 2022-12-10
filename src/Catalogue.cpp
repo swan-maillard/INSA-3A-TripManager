@@ -3,77 +3,79 @@
 using namespace std;
 
 #include "../include/Catalogue.h"
-#include "../include/ListeTrajets.h"
+#include "../include/TripList.h"
 
 Catalogue::Catalogue () {
   #ifdef MAP
       cout << "Appel au constructeur de <Catalogue>" << endl;
   #endif
 
-  trajets = NULL;
+  tripList = NULL;
 }
 
-void Catalogue::Afficher() const {
-  if (trajets == NULL) {
+void Catalogue::Display() const {
+  if (tripList == NULL) {
     cout << "Notre catalogue est pour l'instant vide mais vous pouvez nous aider à le remplir !" << endl;
     return;
   }
 
-  Iterator * trajetIterator = trajets->CreateIterator();
-  const Trajet * currentTrajet;
+  Iterator * tripsIterator = tripList->CreateIterator();
+  const Trip * currentTrip;
 
-  cout << "Notre catalogue propose " << GetNbTrajets() << " trajets :" << endl;
+  cout << "Notre catalogue propose " << GetTripsNumber() << " trajets :" << endl;
 
-  while ((currentTrajet = trajetIterator->Next()) != NULL) {
+  while ((currentTrip = tripsIterator->Next()) != NULL) {
     cout << "- ";
-    currentTrajet->Affichage();
+    currentTrip->Display();
   }
-  delete trajetIterator;
+  delete tripsIterator;
 }
 
-int Catalogue::GetNbTrajets() const {
-  if (trajets == NULL)
+int Catalogue::GetTripsNumber() const {
+  if (tripList == NULL)
     return 0;
 
-  return trajets->GetSize();
+  return tripList->GetListSize();
 }
 
-void Catalogue::AddTrajet(const Trajet & trajet) {
-  if (trajets == NULL)
-    trajets = new ListeTrajets();
+void Catalogue::AddTrip(const Trip & trip) {
+  if (tripList == NULL)
+    tripList = new TripList();
 
-  trajets->AddTrajetAlpha(trajet);
+  tripList->AddTripAlpha(trip);
 }
 
-void Catalogue::SearchTrajets(const char * depart, const char * arrivee) {
-  if (trajets == NULL) {
+void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
+  if (tripList == NULL) {
     cout << "Le catalogue ne contient aucun trajet" << endl;
     return;
   }
 
-  Iterator * iterator = trajets->CreateIterator();
-  const Trajet * currentTrajet;
-  ListeTrajets trajetsFound;
+  Iterator * tripsIterator = tripList->CreateIterator();
+  const Trip * currentTrip;
+  TripList foundTrips;
 
-  while ((currentTrajet = iterator->Next()) != NULL) {
-    if (strcmp(currentTrajet->GetStart(), depart) == 0 && strcmp(currentTrajet->GetEnd(), arrivee) == 0) {
-      trajetsFound.AddTrajetQueue(*currentTrajet);
+  while ((currentTrip = tripsIterator->Next()) != NULL) {
+    if (strcmp(currentTrip->GetStartCity(), startCity) == 0 && strcmp(currentTrip->GetFinishCity(), finishCity) == 0) {
+      foundTrips.AddTripInQueue(*currentTrip);
     }
   }
-  delete iterator;
+  delete tripsIterator;
 
 
-  if (trajetsFound.GetSize() == 0)
-    cout << "Aucun trajet allant de " << depart << " à " << arrivee << " n'a été trouvé..." << endl;
+  if (foundTrips.GetListSize() == 0)
+    cout << "Aucun trajet allant de " << startCity << " à " << finishCity << " n'a été trouvé..." << endl;
+  else if (foundTrips.GetListSize() == 1)
+    cout << "1 trajet allant de " << startCity << " à " << finishCity << " a été trouvé :" << endl;
   else
-    cout << trajetsFound.GetSize() << " trajet(s) allant de " << depart << " à " << arrivee << " ont été trouvé(s) :" << endl;
+    cout << foundTrips.GetListSize() << " trajets allant de " << startCity << " à " << finishCity << " ont été trouvés :" << endl;
 
-  iterator = trajetsFound.CreateIterator();
-  while ((currentTrajet = iterator->Next()) != NULL) {
+  tripsIterator = foundTrips.CreateIterator();
+  while ((currentTrip = tripsIterator->Next()) != NULL) {
     cout << "- ";
-    currentTrajet->Affichage();
+    currentTrip->Display();
   }
-  delete iterator;
+  delete tripsIterator;
 }
 
 
@@ -82,5 +84,5 @@ Catalogue::~Catalogue () {
       cout << "Appel au destructeur de <Catalogue>" << endl;
   #endif
 
-  delete trajets;
+  delete tripList;
 }

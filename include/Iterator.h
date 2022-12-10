@@ -2,20 +2,20 @@
 #define ITERATOR_H
 
 #include "Iterator.h"
-#include "ElementListe.h"
-#include "Trajet.h"
+#include "ElementTripList.h"
+#include "Trip.h"
 
 
 class Iterator {
 
   public:
-    Iterator(const ElementListe * element);
+    Iterator(const ElementTripList * element);
     virtual ~Iterator();
-    const Trajet * Next();
+    const Trip* Next();
 
 
   protected:
-    const ElementListe * currentElement;
+    const ElementTripList * currentElement;
 
 };
 

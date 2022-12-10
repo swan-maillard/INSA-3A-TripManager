@@ -1,21 +1,21 @@
 #if ! defined ( CATALOGUE_H )
 #define CATALOGUE_H
 
-#include "ListeTrajets.h"
+#include "TripList.h"
 
 
 class Catalogue {
 
   public:
     Catalogue();
-    void Afficher() const;
-    int GetNbTrajets() const;
-    void AddTrajet(const Trajet & trajet);
-    void SearchTrajets(const char * depart, const char * arrivee);
+    void Display() const;
+    int GetTripsNumber() const;
+    void AddTrip(const Trip & trip);
+    void SearchTrip(const char * tripStart, const char * tripFinish);
     virtual ~Catalogue ();
 
   protected:
-    ListeTrajets * trajets;
+    TripList * tripList;
 
 };
 
