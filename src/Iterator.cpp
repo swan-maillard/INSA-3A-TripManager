@@ -24,7 +24,7 @@ Iterator::~Iterator() {
 const Trip * Iterator::Next() {
   const Trip * currentTrip = NULL;
 
-  if (currentTrip != NULL) {
+  if (currentElement != NULL) {
     currentTrip = currentElement->GetTrip();
     currentElement = currentElement->GetNext();
   }
