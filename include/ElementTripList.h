@@ -19,12 +19,26 @@ class ElementTripList {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
+    // Prend en argument le trajet représenté par le maillon
     ElementTripList(const Trip & trip);
+
+    // Constructeur par copie
     ElementTripList(const ElementTripList & element);
-    void AddNext(ElementTripList * element);
-    const Trip* GetTrip() const;
-    ElementTripList* GetNext() const;
+    
+    // Destructeur
     virtual ~ElementTripList ();
+
+    // Ajoute un maillon à la suite de ce maillon
+    void AddNext(ElementTripList * element);
+
+    // Renvoie le trajet représenté par le maillon
+    const Trip* GetTrip() const;
+
+    // Renvoie le maillon suivant ou NULL s'il n'y a pas de maillon suivant
+    ElementTripList* GetNext() const;
+
 
 //----------------------------------------------------------------- PRIVE
   protected:

@@ -21,15 +21,34 @@ class CompoundTrip : public Trip {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
     CompoundTrip();
+
+    // Constructeur par copie
     CompoundTrip(const CompoundTrip & CompoundTrip);
-    const CompoundTrip * Copy() const;
-    void Display() const;
-    const char* GetStartCity() const;
-    const char* GetFinishCity() const;
-    int GetTripsNumber() const;
-    void AddTrip(const Trip & trip);
+    
+    // Destructeur
     virtual ~CompoundTrip();
+
+    // Renvoie une copie du trajet composé
+    const CompoundTrip * Copy() const;
+
+    // Affiche les trajets constituants le trajet composé
+    void Display() const;
+
+    // Renvoie la ville de départ du trajet composé
+    const char* GetStartCity() const;
+
+    // Renvoie la ville d'arrivée du trajet composé
+    const char* GetFinishCity() const;
+
+    // Renvoie le nombre de trajets constituants le trajet composé 
+    int GetTripsNumber() const;
+
+    // Ajoute un trajet simple ou composé au trajet composé
+    void AddTrip(const Trip & trip);
+
 
 //----------------------------------------------------------------- PRIVE
   protected:

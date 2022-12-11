@@ -15,12 +15,28 @@ class Trip {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
     Trip();
+
+    // Renvoie une copie du trajet
+    // Méthode abstraite
     virtual const Trip * Copy() const = 0;
-    virtual void Display() const = 0;
-    virtual const char* GetStartCity() const = 0;
-    virtual const char* GetFinishCity() const = 0;
+    
+    // Destructeur
     virtual ~Trip();
+
+    // Affiche les informations du trajet
+    // Méthode abstraite
+    virtual void Display() const = 0;
+
+    // Renvoie la ville de départ du trajet
+    // Méthode abstraite
+    virtual const char* GetStartCity() const = 0;
+
+    // Renvoie la ville d'arrivée du trajet
+    // Méthode abstraite
+    virtual const char* GetFinishCity() const = 0;
 };
 
 #endif // TRIP_H

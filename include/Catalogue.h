@@ -19,12 +19,26 @@ class Catalogue {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
     Catalogue();
-    void Display() const;
-    int GetTripsNumber() const;
-    void AddTrip(const Trip & trip);
-    void SearchTrip(const char * startCity, const char * finishCity);
+
+    // Destructeur
     virtual ~Catalogue ();
+
+    // Affiche les différents trajets du catalogue
+    void Display() const;
+
+    // Renvoie le nombre de trajets du catalogue
+    int GetTripsNumber() const;
+
+    // Ajoute un trajet au catalogue
+    // L'ajout se fera alphabétiquement selon le nom de la ville d'arrivée
+    void AddTrip(const Trip & trip);
+
+    // Recherche un trajet avec le nom de la ville de départ et celle de fin
+    void SearchTrip(const char * startCity, const char * finishCity);
+
 
 //----------------------------------------------------------------- PRIVE
   protected:

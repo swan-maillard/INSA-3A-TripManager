@@ -22,14 +22,32 @@ class TripList {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
     TripList();
+
+    // Constructeur par copie
     TripList(const TripList & tripList);
+
+    // Destructeur
     virtual ~TripList();
+
+    // Ajoute un trajet à la fin de la liste chainée
     void AddTripInQueue(const Trip & trip);
+
+    // Ajoute un trajet à la liste chainée en respectant l'ordre alphabétique du nom de la ville d'arrivée
     void AddTripAlpha(const Trip & trip);
+
+    // Renvoie le premier trajet de la liste chainée
     const Trip * GetFirstTrip() const;
+
+    // Renvoie le dernier trajet de la liste chainée
     const Trip * GetLastTrip() const;
+
+    // Renvoie la taille de la liste chainée
     int GetListSize() const;
+
+    // Crée un itérateur en lui passant en argument le premier maillon de la liste chainée
     Iterator * CreateIterator() const;
 
 //----------------------------------------------------------------- PRIVE

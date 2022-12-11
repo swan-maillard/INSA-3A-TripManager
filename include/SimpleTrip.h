@@ -21,13 +21,30 @@ class SimpleTrip : public Trip {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
+    // Prend en argument la ville de départ, d'arrivée et le moyen de transport
     SimpleTrip (const char* startCity, const char* finishCity, const char* transport);
+
+    // Constructeur par copie
     SimpleTrip(const SimpleTrip & trajet);
-    const SimpleTrip * Copy() const;
+
+    // Destructeur
     virtual ~SimpleTrip();
+
+    // Renvoie une copie du trajet simple
+    const SimpleTrip * Copy() const;
+
+    // Affiche les attributs du trajet simple (ville de départ, d'arrivée et le moyen de transport)
     void Display() const;
+
+    // Renvoie le moyen de transport du trajet
     const char* GetTransport() const;
+
+    // Renvoie la ville de départ du trajet
     const char* GetStartCity() const;
+
+    // Renvoie la ville d'arrivée du trajet
     const char* GetFinishCity() const;
 
 //----------------------------------------------------------------- PRIVE

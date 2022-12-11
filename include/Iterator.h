@@ -22,8 +22,15 @@ class Iterator {
 //----------------------------------------------------------------- PUBLIC
   public:
 //----------------------------------------------------- Méthodes publiques
+
+    // Constructeur
+    // Prend en argument le maillon de départ de l'itérateur
     Iterator(const ElementTripList * element);
+
+    // Destructeur
     virtual ~Iterator();
+
+    // Renvoie le maillon courant et passe au maillon suivant
     const Trip* Next();
 
 
