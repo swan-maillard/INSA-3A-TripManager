@@ -1,16 +1,35 @@
-using namespace std;
+/*************************************************************************
+    TripList  -  Liste chainée contenant des trajets.
+                 Ses maillons sont de type ElementTripList
+                             -------------------
+    début                : 13/12/2022
+    copyright            : (C) 2022 par MALARD Sarah & MAILLARD Swan
+    e-mail               : sarah.malard@insa-lyon.fr & swan.maillard@insa-lyon.fr
+*************************************************************************/
 
+
+//---------- Réalisation de la classe <TripList> (fichier TripList.cpp) ------------
+
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 #include <cstring>
 
+//-------------------------------------------------------- Include personnel
 #include "../include/TripList.h"
 #include "../include/ElementTripList.h"
 #include "../include/Trip.h"
 #include "../include/Iterator.h"
 
+
+//----------------------------------------------------------------- PUBLIC
+
 TripList::TripList() {
   #ifdef MAP
-      cout << "Appel au constructeur de <TripList>" << endl;
+      cout << "Construction de <TripList>" << endl;
   #endif
 
   size = 0;
@@ -19,7 +38,7 @@ TripList::TripList() {
 
 TripList::TripList(const TripList & tripList) {
   #ifdef MAP
-      cout << "Appel au constructeur de copie <TripList>" << endl;
+      cout << "Construction par copie de <TripList>" << endl;
   #endif
 
   size = tripList.size;
@@ -39,7 +58,7 @@ TripList::TripList(const TripList & tripList) {
 
 TripList::~TripList() {
   #ifdef MAP
-      cout << "Appel au destructeur de <TripList>" << endl;
+      cout << "Destruction de <TripList>" << endl;
   #endif
 
   ElementTripList * currentElement = firstElem;
@@ -52,6 +71,10 @@ TripList::~TripList() {
 
 
 void TripList::AddTripInQueue(const Trip & trip) {
+  #ifdef MAP
+      cout << "Exécution de AddtripInQueue de <TripList>" << endl;
+  #endif
+
   ElementTripList * newElement = new ElementTripList(trip);
 
   if (firstElem == NULL) {
@@ -67,6 +90,10 @@ void TripList::AddTripInQueue(const Trip & trip) {
 
 
 void TripList::AddTripAlpha(const Trip & trip) {
+  #ifdef MAP
+      cout << "Exécution de AddTripAlpha de <TripList>" << endl;
+  #endif
+
   ElementTripList * newElement = new ElementTripList(trip);
 
   if (firstElem == NULL) {
@@ -96,6 +123,10 @@ void TripList::AddTripAlpha(const Trip & trip) {
 
 
 const Trip * TripList::GetFirstTrip() const {
+  #ifdef MAP
+      cout << "Exécution de GetFirstTrip de <TripList>" << endl;
+  #endif
+
   if (firstElem == NULL)
     return NULL;
 
@@ -104,6 +135,10 @@ const Trip * TripList::GetFirstTrip() const {
 
 
 const Trip * TripList::GetLastTrip() const {
+  #ifdef MAP
+      cout << "Exécution de GetLastTrip de <TripList>" << endl;
+  #endif
+
   if (lastElem == NULL)
     return NULL;
 
@@ -112,11 +147,19 @@ const Trip * TripList::GetLastTrip() const {
 
 
 int TripList::GetListSize() const {
+  #ifdef MAP
+      cout << "Exécution de GetListSize de <TripList>" << endl;
+  #endif
+
   return size;
 }
 
 
 Iterator * TripList::CreateIterator() const {
+  #ifdef MAP
+      cout << "Exécution de CreateIterator de <TripList>" << endl;
+  #endif
+
   Iterator * iterator = new Iterator(firstElem);
   return iterator;
 }

@@ -1,14 +1,33 @@
-using namespace std;
+/*************************************************************************
+    SimpleTrip  -  Trajet simple allant d'une ville d'arrivée à une ville de 
+                   départ avec un moyen de transport.
+                   Cette classe hérite de Trip.
+                             -------------------
+    début                : 13/12/2022
+    copyright            : (C) 2022 par MALARD Sarah & MAILLARD Swan
+    e-mail               : sarah.malard@insa-lyon.fr & swan.maillard@insa-lyon.fr
+*************************************************************************/
 
+
+//---------- Réalisation de la classe <SimpleTrip> (fichier SimpleTrip.cpp) ------------
+
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 #include <cstring>
 
+//-------------------------------------------------------- Include personnel
 #include "../include/SimpleTrip.h"
 
 
+//----------------------------------------------------------------- PUBLIC
+
 SimpleTrip::SimpleTrip(const char* startCity, const char* finishCity, const char* transport): Trip() {
   #ifdef MAP
-      cout << "Appel au constructeur de <SimpleTrip>" << endl;
+      cout << "Construction de <SimpleTrip>" << endl;
   #endif
 
   char * startCityCopy= new char(strlen(startCity) + 1);
@@ -26,7 +45,7 @@ SimpleTrip::SimpleTrip(const char* startCity, const char* finishCity, const char
 
 SimpleTrip::SimpleTrip(const SimpleTrip & simpleTrip): SimpleTrip(simpleTrip.startCity, simpleTrip.finishCity, simpleTrip.transport) {
   #ifdef MAP
-      cout << "Appel au constructeur de copie de <SimpleTrip>" << endl;
+      cout << "Construction par copie de <SimpleTrip>" << endl;
   #endif
 }
 
@@ -36,7 +55,7 @@ const SimpleTrip * SimpleTrip::Copy() const {
 
 SimpleTrip::~SimpleTrip () {
   #ifdef MAP
-      cout << "Appel au destructeur de <SimpleTrip>" << endl;
+      cout << "Destruction de <SimpleTrip>" << endl;
   #endif
 
   delete [] startCity;
@@ -46,20 +65,36 @@ SimpleTrip::~SimpleTrip () {
 
 
 void SimpleTrip::Display() const {
+  #ifdef MAP
+      cout << "Exécution de Display de <SimpleTrip>" << endl;
+  #endif
+
   cout << startCity << " à " << finishCity << " en " << transport << endl;
 }
 
 
-const char* SimpleTrip::GetTransport() const{
+const char* SimpleTrip::GetTransport() const {
+  #ifdef MAP
+      cout << "Exécution de GetTransport de <SimpleTrip>" << endl;
+  #endif
+
   return transport;
 }
 
 
-const char* SimpleTrip::GetStartCity() const{
+const char* SimpleTrip::GetStartCity() const {
+  #ifdef MAP
+      cout << "Exécution de GetStartCity de <SimpleTrip>" << endl;
+  #endif
+
   return startCity;
 }
 
 
-const char* SimpleTrip::GetFinishCity() const{
+const char* SimpleTrip::GetFinishCity() const {
+  #ifdef MAP
+      cout << "Exécution de GetFinishCity de <SimpleTrip>" << endl;
+  #endif
+
   return finishCity;
 }

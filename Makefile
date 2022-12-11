@@ -11,7 +11,7 @@ DEVFLAGS		:= 	-DMAP
 RMFLAGS			:= 	-rf
 
 #Fichiers
-EXECUTABLE	:= 	app
+EXECUTABLE		:= 	app
 SRC_DIR			:= 	src/
 OBJ_DIR			:= 	bin/
 SRC					:= 	$(wildcard $(SRC_DIR)*.cpp)
