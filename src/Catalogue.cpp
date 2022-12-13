@@ -94,10 +94,10 @@ void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
     return;
   }
 
+  // On itère sur les trajets du catalogue et on stocke ceux qui correspondent à la recherche dans foundTrips
   Iterator * tripsIterator = tripList->CreateIterator();
   const Trip * currentTrip;
   TripList foundTrips;
-
   while ((currentTrip = tripsIterator->Next()) != NULL) {
     if (strcmp(currentTrip->GetStartCity(), startCity) == 0 && strcmp(currentTrip->GetFinishCity(), finishCity) == 0) {
       foundTrips.AddTripInQueue(*currentTrip);
@@ -112,6 +112,7 @@ void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
   else
     cout << foundTrips.GetListSize() << " trajets allant de " << startCity << " à " << finishCity << " ont été trouvés :" << endl;
 
+  // On itère sur foundTrips (trajets correspondant à la recherche) et on les affiche
   tripsIterator = foundTrips.CreateIterator();
   while ((currentTrip = tripsIterator->Next()) != NULL) {
     cout << "- ";

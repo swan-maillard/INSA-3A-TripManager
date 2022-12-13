@@ -1,16 +1,31 @@
+/*************************************************************************
+    OUI.SNC++ : Vos trajets n'ont jamais été aussi simples !
+
+    Fichier principal de l'application, gère l'affichage des différents menus.
+                             -------------------
+    début                : 13/12/2022
+    copyright            : (C) 2022 par MALARD Sarah & MAILLARD Swan
+    e-mail               : sarah.malard@insa-lyon.fr & swan.maillard@insa-lyon.fr
+*************************************************************************/
+
+
+//---------------------- Fichier main.cpp ------------------------
+
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 #include <cstring>
-using namespace std;
 
+//-------------------------------------------------------- Include personnel
 #include "../include/Trip.h"
 #include "../include/SimpleTrip.h"
 #include "../include/TripList.h"
 #include "../include/Catalogue.h"
 #include "../include/CompoundTrip.h"
 
-// A faire :
-// - Recherche avancée
-// - Formatage des string
 
 void displayMenu(Catalogue * catalogue);
 void displayCatalogue(Catalogue * catalogue);
@@ -19,23 +34,15 @@ void addTrip(Catalogue * catalogue);
 void addSimpleTrip(Catalogue * catalogue);
 void addCompoundTrip(Catalogue * catalogue);
 
+// Fonction principale
 int main() {
   Catalogue catalogue;
-
-  CompoundTrip tc1;
-  tc1.AddTrip(SimpleTrip("Jouy", "Vernon", "Moto"));
-  tc1.AddTrip(SimpleTrip("Vernon", "Evreux", "Moto"));
-
-  catalogue.AddTrip(SimpleTrip("Jouy", "Vernon", "Moto"));
-  catalogue.AddTrip(SimpleTrip("Vernon", "Evreux", "Voiture"));
-  catalogue.AddTrip(tc1);
-
-
   displayMenu(&catalogue);
 
   return EXIT_SUCCESS;
 }
 
+// Affiche le menu principal
 void displayMenu(Catalogue * catalogue) {
 
   int choice;
@@ -78,10 +85,12 @@ void displayMenu(Catalogue * catalogue) {
   } while (choice != 4);
 }
 
+// Affiche le contenu du catalogue
 void displayCatalogue(Catalogue * catalogue) {
   catalogue->Display();
 }
 
+// Recherche un trajet en fonction du nom de la ville de départ et d'arrivée
 void searchTrip(Catalogue * catalogue) {
   char startCity[50], finishCity[50];
 
@@ -94,6 +103,7 @@ void searchTrip(Catalogue * catalogue) {
   catalogue->SearchTrip(startCity, finishCity);
 }
 
+// Permet de choisir si l'utilisateur souhaite ajouter un trajet simple ou composé
 void addTrip(Catalogue * catalogue) {
   int typeTrip;
   bool loop;
@@ -132,6 +142,7 @@ void addTrip(Catalogue * catalogue) {
   } while (loop);
 }
 
+// Ajoute un trajet simple
 void addSimpleTrip(Catalogue * catalogue) {
   char startCity[50], finishCity[50], transport[50];
 
@@ -146,6 +157,7 @@ void addSimpleTrip(Catalogue * catalogue) {
   catalogue->AddTrip(SimpleTrip(startCity, finishCity, transport));
 }
 
+// Ajoute un trajet composé
 void addCompoundTrip(Catalogue * catalogue) {
   char startCity[50], finishCity[50], transport[50];
 

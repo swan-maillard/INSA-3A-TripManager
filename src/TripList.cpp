@@ -97,17 +97,21 @@ void TripList::AddTripAlpha(const Trip & trip) {
   ElementTripList * newElement = new ElementTripList(trip);
 
   if (firstElem == NULL) {
+    // La liste est vide
     firstElem = lastElem = newElement;
   }
   else if (strcmp(trip.GetFinishCity(), GetFirstTrip()->GetFinishCity()) < 0) {
+    // Le nouveau trajet s'insère en tête
     newElement->AddNext(firstElem);
     firstElem = newElement;
   }
   else if (strcmp(trip.GetFinishCity(), GetLastTrip()->GetFinishCity()) >= 0) {
+    // Le nouveau trajet s'insère en queue
     lastElem->AddNext(newElement);
     lastElem = newElement;
   }
   else {
+    // On cherche où le trajet doit s'insérer en comparant les noms des villes d'arrivées
     ElementTripList * previousElement = firstElem;
     ElementTripList * currentElement = firstElem->GetNext();
     while (strcmp(trip.GetFinishCity(), currentElement->GetTrip()->GetFinishCity()) >= 0) {

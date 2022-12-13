@@ -18,13 +18,13 @@ class Trip {
 
     // Constructeur
     Trip();
+    
+    // Destructeur
+    virtual ~Trip();
 
     // Renvoie une copie du trajet
     // Méthode abstraite
     virtual const Trip * Copy() const = 0;
-    
-    // Destructeur
-    virtual ~Trip();
 
     // Affiche les informations du trajet
     // Méthode abstraite

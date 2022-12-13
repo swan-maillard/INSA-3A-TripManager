@@ -1,21 +1,21 @@
 #Outils
-CXX		:=	g++
-LD		:= 	g++
-RM		:= 	rm
-ECHO	:= 	echo
-MKDIR	:= 	mkdir
+CXX			:=	g++
+LD			:= 	g++
+RM			:= 	rm
+ECHO		:= 	echo
+MKDIR		:= 	mkdir
 
 #Options
-CXXFLAGS		:= 	-ansi -pedantic -Wall -std=c++11 -g
-DEVFLAGS		:= 	-DMAP
-RMFLAGS			:= 	-rf
+CXXFLAGS	:= 	-ansi -pedantic -Wall -std=c++11 -g
+DEVFLAGS	:= 	-DMAP
+RMFLAGS		:= 	-rf
 
 #Fichiers
-EXECUTABLE		:= 	app
-SRC_DIR			:= 	src/
-OBJ_DIR			:= 	bin/
-SRC					:= 	$(wildcard $(SRC_DIR)*.cpp)
-OBJ					:= 	$(SRC:${SRC_DIR}%.cpp=$(OBJ_DIR)%.o)
+EXECUTABLE	:= 	trajets
+SRC_DIR		:= 	src/
+OBJ_DIR		:= 	bin/
+SRC			:= 	$(wildcard $(SRC_DIR)*.cpp)
+OBJ			:= 	$(SRC:${SRC_DIR}%.cpp=$(OBJ_DIR)%.o)
 
 
 #Cibles

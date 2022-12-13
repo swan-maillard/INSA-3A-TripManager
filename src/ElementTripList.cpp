@@ -56,6 +56,7 @@ void ElementTripList::AddNext(ElementTripList * element) {
       cout << "Exécution de AddNext de <ElementTripList>" << endl;
   #endif
 
+  // Attention l'élément que l'on ajoute a potentiellement d'autres maillons à sa suite
   ElementTripList * elementNext = element->next;
   while (elementNext != NULL)
     elementNext = elementNext->next;
