@@ -12,6 +12,7 @@
 
 //---------------------------------------------------------------- INCLUDE
 //-------------------------------------------------------- Include système
+#include <string>
 #include "Trip.h"
 #include "TripList.h"
 
@@ -27,7 +28,7 @@ class CompoundTrip : public Trip {
 
     // Constructeur par copie
     CompoundTrip(const CompoundTrip & CompoundTrip);
-    
+
     // Destructeur
     virtual ~CompoundTrip();
 
@@ -43,11 +44,13 @@ class CompoundTrip : public Trip {
     // Renvoie la ville d'arrivée du trajet composé
     const char* GetFinishCity() const;
 
-    // Renvoie le nombre de trajets constituants le trajet composé 
+    // Renvoie le nombre de trajets constituants le trajet composé
     int GetTripsNumber() const;
 
     // Ajoute un trajet simple ou composé au trajet composé
     void AddTrip(const Trip & trip);
+
+    const string ToFileFormat() const;
 
 
 //----------------------------------------------------------------- PRIVE

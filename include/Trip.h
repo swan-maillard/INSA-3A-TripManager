@@ -10,6 +10,8 @@
 #if ! defined ( TRIP_H )
 #define TRIP_H
 
+#include <string>
+
 class Trip {
 
 //----------------------------------------------------------------- PUBLIC
@@ -18,7 +20,7 @@ class Trip {
 
     // Constructeur
     Trip();
-    
+
     // Destructeur
     virtual ~Trip();
 
@@ -37,6 +39,8 @@ class Trip {
     // Renvoie la ville d'arrivée du trajet
     // Méthode abstraite
     virtual const char* GetFinishCity() const = 0;
+
+    virtual const string ToFileFormat() const = 0;
 };
 
 #endif // TRIP_H

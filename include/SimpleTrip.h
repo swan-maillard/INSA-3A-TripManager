@@ -1,5 +1,5 @@
 /*************************************************************************
-    SimpleTrip  -  Trajet simple allant d'une ville d'arrivée à une ville de 
+    SimpleTrip  -  Trajet simple allant d'une ville d'arrivée à une ville de
                    départ avec un moyen de transport.
                    Cette classe hérite de Trip.
                              -------------------
@@ -11,6 +11,8 @@
 //---------- Interface de la classe <SimpleTrip> (fichier SimpleTrip.h) ----------------
 #if ! defined ( SIMPLE_TRIP_H )
 #define SIMPLE_TRIP_H
+
+#include <string>
 
 #include "Trip.h"
 
@@ -46,6 +48,8 @@ class SimpleTrip : public Trip {
 
     // Renvoie la ville d'arrivée du trajet
     const char* GetFinishCity() const;
+
+    const string ToFileFormat() const;
 
 //----------------------------------------------------------------- PRIVE
   protected:

@@ -1,5 +1,5 @@
 /*************************************************************************
-    SimpleTrip  -  Trajet simple allant d'une ville d'arrivée à une ville de 
+    SimpleTrip  -  Trajet simple allant d'une ville d'arrivée à une ville de
                    départ avec un moyen de transport.
                    Cette classe hérite de Trip.
                              -------------------
@@ -18,6 +18,7 @@
 using namespace std;
 #include <iostream>
 #include <cstring>
+#include <string>
 
 //-------------------------------------------------------- Include personnel
 #include "../include/SimpleTrip.h"
@@ -97,4 +98,13 @@ const char* SimpleTrip::GetFinishCity() const {
   #endif
 
   return finishCity;
+}
+
+
+const string SimpleTrip::ToFileFormat() const {
+  #ifdef MAP
+      cout << "Exécution de ToFileFormat de <SimpleTrip>" << endl;
+  #endif
+
+  return (string(startCity) + ";" + string(finishCity) + ";" + string(transport) + ";\n");
 }

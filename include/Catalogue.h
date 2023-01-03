@@ -13,6 +13,7 @@
 //---------------------------------------------------------------- INCLUDE
 //-------------------------------------------------------- Include système
 #include "TripList.h"
+#include <fstream>
 
 class Catalogue {
 
@@ -38,6 +39,10 @@ class Catalogue {
 
     // Recherche un trajet avec le nom de la ville de départ et celle de fin
     void SearchTrip(const char * startCity, const char * finishCity);
+
+    void LoadFromFile(ifstream & file);
+
+    void SaveInFile(ofstream & file) const;
 
 
 //----------------------------------------------------------------- PRIVE

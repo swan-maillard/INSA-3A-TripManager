@@ -16,6 +16,7 @@
 using namespace std;
 #include <iostream>
 #include <cstring>
+#include <string>
 
 //-------------------------------------------------------- Include personnel
 #include "../include/CompoundTrip.h"
@@ -119,4 +120,25 @@ void CompoundTrip::AddTrip(const Trip & trip){
     tripList = new TripList();
 
   tripList->AddTripInQueue(trip);
+}
+
+const string CompoundTrip::ToFileFormat() const{
+
+  string tripFormated = "";
+
+  if (tripList == NULL)
+    return tripFormated;
+
+  tripFormated += "COMPOUND;" + string(GetStartCity()) + ";" + string(GetFinishCity()) + ";\n";
+
+  Iterator * tripsIterator = tripList->CreateIterator();
+  const Trip * currentTrip;
+  while((currentTrip = tripsIterator->Next()) != NULL) {
+    tripFormated += currentTrip->ToFileFormat();
+  }
+  delete tripsIterator;
+
+  tripFormated += "END_COMPOUND;\n";
+
+  return tripFormated;
 }

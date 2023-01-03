@@ -18,7 +18,8 @@
 using namespace std;
 #include <iostream>
 #include <cstring>
-
+#include <fstream>
+#include <string>
 //-------------------------------------------------------- Include personnel
 #include "../include/Trip.h"
 #include "../include/SimpleTrip.h"
@@ -26,6 +27,54 @@ using namespace std;
 #include "../include/Catalogue.h"
 #include "../include/CompoundTrip.h"
 
+
+void load(Catalogue* catalogue){
+  cout<<"Quel fichier voulez-vous lire ?"<<endl;
+  string file;
+  cin>>file;
+  string tab[5];
+  cout<<"Souhaitez-vous spécifier le type de trajet que vous voulez ?\n - 0 si non \n - 1 pour les trajets simples \n -2 pour les trajets composés"<<endl;
+  cin>>tab[0];
+  cout<<"Souhaitez-vous spécifier une ville de départ ?\n - 0 si non - la ville en question si oui"<<endl;
+  cin>>tab[1];
+  cout<<"Souhaitez-vous spécifier une ville d'arrivée ?\n - 0 si non - la ville en question si oui"<<endl;
+  cin>>tab[2];
+  cout<<"Souhaitez-vous fixer une intervalle de trajet ?\n - 0, entrée, 0 si non \n n, entrée, m si oui"<<endl;
+  cin>>tab[3];
+  cin>>tab[4];
+  ifstream fic;
+  fic.open(file);
+
+  if(fic){
+    catalogue->LoadFromFile(fic);
+    fic.close();
+  } else{
+    cout<<"ERREUR : impossible d'ouvrir le fichier"<<endl;
+  }
+}
+
+void loadTest(Catalogue* catalogue){
+  ifstream fic;
+  fic.open("demo.txt");
+  if(fic){
+    catalogue->LoadFromFile(fic);
+    fic.close();
+  }
+}
+
+void save(Catalogue* catalogue){
+  cout<<"Dans quel fichier souhaitez-vous sauvegarder votre catalogue ?"<<endl;
+  string file;
+  cin>>file;
+  ofstream fic;
+  fic.open(file);
+  if(fic){
+    catalogue->SaveInFile(fic);
+    fic.close();
+  }else{
+    cout<<"ERREUR : impossible d'ouvrir le fichier"<<endl;
+  }
+}
 
 void displayMenu(Catalogue * catalogue);
 void displayCatalogue(Catalogue * catalogue);
@@ -53,6 +102,8 @@ void displayMenu(Catalogue * catalogue) {
     cout << " 2 - Rechercher un trajet" << endl;
     cout << " 3 - Ajouter un trajet" << endl;
     cout << " 4 - Quitter" << endl;
+    cout << " 5 - Charger un fichier" <<endl;
+    cout << " 6 - Sauvegarder dans un fichier" <<endl;
     cin >> choice;
 
     cout << endl;
@@ -75,6 +126,12 @@ void displayMenu(Catalogue * catalogue) {
         break;
       case 4: // Fin
         cout << "A bientôt dans notre grand catalogue !" << endl;
+        break;
+      case 5:
+        load(catalogue);
+        break;
+      case 6:
+        save(catalogue);
         break;
       default: // Erreur de saisie
         cout << "Veuillez choisir une option parmi celles proposées !" << endl;

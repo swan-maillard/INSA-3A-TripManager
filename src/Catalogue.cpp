@@ -16,10 +16,14 @@
 using namespace std;
 #include <iostream>
 #include <cstring>
+#include <fstream>
+#include <string>
 
 //------------------------------------------------------ Include personnel
 #include "../include/Catalogue.h"
 #include "../include/TripList.h"
+#include "../include/SimpleTrip.h"
+#include "../include/CompoundTrip.h"
 
 
 //----------------------------------------------------------------- PUBLIC
@@ -121,3 +125,66 @@ void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
   delete tripsIterator;
 }
 
+void Catalogue::LoadFromFile(ifstream & file) {
+  string ligne;
+  int nbTrips = 0;
+  bool isCompound = false;
+  CompoundTrip * tc = NULL;
+
+  while (getline(file, ligne)) {
+    char c;
+    string mots[3];
+    int index = 0;
+
+    for (int i=0; i<(int)ligne.length(); i++) {
+      c = ligne[i];
+
+      if (c == ';') {
+        index++;
+      }
+      else {
+        mots[index] += c;
+      }
+    }
+
+    if (mots[0].length() == 0)
+      continue;
+
+    if (mots[0] == "COMPOUND") {
+      isCompound = true;
+      nbTrips++;
+      tc = new CompoundTrip();
+      continue;
+    }
+    else if (mots[0] == "END_COMPOUND") {
+      isCompound = false;
+      AddTrip(*tc);
+      delete tc;
+      tc=NULL;
+      continue;
+    }
+
+    SimpleTrip trip(mots[0].c_str(), mots[1].c_str(), mots[2].c_str());
+    if (!isCompound) {
+      nbTrips++;
+      AddTrip(trip);
+    }
+    else {
+      tc->AddTrip(trip);
+    }
+  }
+
+}
+
+void Catalogue::SaveInFile(ofstream & file) const {
+  if (tripList == NULL) return;
+
+  Iterator * tripsIterator = tripList->CreateIterator();
+  const Trip * currentTrip;
+
+  while ((currentTrip = tripsIterator->Next()) != NULL) {
+    file<<currentTrip->ToFileFormat();
+  }
+
+  delete tripsIterator;
+}
