@@ -108,3 +108,7 @@ const string SimpleTrip::ToFileFormat() const {
 
   return (string(startCity) + ";" + string(finishCity) + ";" + string(transport) + ";\n");
 }
+
+const int SimpleTrip::GetType() const{
+  return 1;
+}

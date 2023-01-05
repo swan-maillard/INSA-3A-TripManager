@@ -40,9 +40,9 @@ class Catalogue {
     // Recherche un trajet avec le nom de la ville de départ et celle de fin
     void SearchTrip(const char * startCity, const char * finishCity);
 
-    void LoadFromFile(ifstream & file);
+    void LoadFromFile(ifstream & file, int type, string villedepart, string villearrivee, int n, int m);
 
-    void SaveInFile(ofstream & file) const;
+    void SaveInFile(ofstream & file, int type, string villedepart, string villearrivee) const;
 
 
 //----------------------------------------------------------------- PRIVE

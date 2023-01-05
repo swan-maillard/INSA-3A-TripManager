@@ -125,12 +125,15 @@ void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
   delete tripsIterator;
 }
 
-void Catalogue::LoadFromFile(ifstream & file) {
+void Catalogue::LoadFromFile(ifstream & file, int type, string villedepart, string villearrivee, int n, int m) {
   string ligne;
   int nbTrips = 0;
   bool isCompound = false;
   CompoundTrip * tc = NULL;
 
+
+  string departcompose;
+  string arriveecomposee;
   while (getline(file, ligne)) {
     char c;
     string mots[3];
@@ -146,7 +149,6 @@ void Catalogue::LoadFromFile(ifstream & file) {
         mots[index] += c;
       }
     }
-
     if (mots[0].length() == 0)
       continue;
 
@@ -154,11 +156,17 @@ void Catalogue::LoadFromFile(ifstream & file) {
       isCompound = true;
       nbTrips++;
       tc = new CompoundTrip();
+      departcompose=mots[1];
+      arriveecomposee=mots[2];
       continue;
     }
     else if (mots[0] == "END_COMPOUND") {
       isCompound = false;
+      if(type!=1&& (villedepart=="0" || villedepart==departcompose) && (villearrivee=="0"||villearrivee==arriveecomposee)&&((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n))){
       AddTrip(*tc);
+    }
+    departcompose="0";
+    arriveecomposee="0";
       delete tc;
       tc=NULL;
       continue;
@@ -166,23 +174,28 @@ void Catalogue::LoadFromFile(ifstream & file) {
 
     SimpleTrip trip(mots[0].c_str(), mots[1].c_str(), mots[2].c_str());
     if (!isCompound) {
-      nbTrips++;
-      AddTrip(trip);
+      if(type!=2&& (villedepart=="0" || villedepart==mots[0]) && (villearrivee=="0"||villearrivee==mots[1])){
+        nbTrips++;
+        if(((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n)))
+          AddTrip(trip);
+    }
     }
     else {
       tc->AddTrip(trip);
     }
   }
+  cout<<"nombre de trajets :" <<nbTrips; //problème dans le compteur de trajet?
 
 }
 
-void Catalogue::SaveInFile(ofstream & file) const {
+void Catalogue::SaveInFile(ofstream & file, int type, string villedepart, string villearrivee) const {
   if (tripList == NULL) return;
 
   Iterator * tripsIterator = tripList->CreateIterator();
   const Trip * currentTrip;
 
   while ((currentTrip = tripsIterator->Next()) != NULL) {
+    if((type==0 || type==currentTrip->GetType())&&(villedepart=="0"||villedepart==currentTrip->GetStartCity())&&(villearrivee=="0"||villearrivee==currentTrip->GetFinishCity()))
     file<<currentTrip->ToFileFormat();
   }
 
