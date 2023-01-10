@@ -162,7 +162,7 @@ void Catalogue::LoadFromFile(ifstream & file, int type, string villedepart, stri
     }
     else if (mots[0] == "END_COMPOUND") {
       isCompound = false;
-      if(type!=1&& (villedepart=="0" || villedepart==departcompose) && (villearrivee=="0"||villearrivee==arriveecomposee)&&((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n))){
+      if(type!=1&& (villedepart=="0" || villedepart==departcompose) && (villearrivee=="0"||villearrivee==arriveecomposee)&&((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n))){ //partie sur n et m à enlever car ça marche pas
       AddTrip(*tc);
     }
     departcompose="0";
@@ -176,7 +176,7 @@ void Catalogue::LoadFromFile(ifstream & file, int type, string villedepart, stri
     if (!isCompound) {
       if(type!=2&& (villedepart=="0" || villedepart==mots[0]) && (villearrivee=="0"||villearrivee==mots[1])){
         nbTrips++;
-        if(((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n)))
+        if(((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n))) //partie sur n et m qui marche pas
           AddTrip(trip);
     }
     }
