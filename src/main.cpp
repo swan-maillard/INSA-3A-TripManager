@@ -32,21 +32,32 @@ void load(Catalogue* catalogue){
   cout<<"Quel fichier voulez-vous lire ?"<<endl;
   string file;
   cin>>file;
-  string tab[5];
-  cout<<"Souhaitez-vous spécifier le type de trajet que vous voulez ?\n - 0 si non \n - 1 pour les trajets simples \n -2 pour les trajets composés"<<endl;
-  cin>>tab[0];
-  cout<<"Souhaitez-vous spécifier une ville de départ ?\n - 0 si non - la ville en question si oui"<<endl;
-  cin>>tab[1];
-  cout<<"Souhaitez-vous spécifier une ville d'arrivée ?\n - 0 si non - la ville en question si oui"<<endl;
-  cin>>tab[2];
-  cout<<"Souhaitez-vous fixer une intervalle de trajet ?\n - 0, entrée, 0 si non \n n, entrée, m si oui"<<endl;
-  cin>>tab[3];
-  cin>>tab[4];
+
+  cout<<"Souhaitez-vous spécifier le type de trajet que vous voulez ?\n - 0 si non \n - 1 pour les trajets simples \n - 2 pour les trajets composés"<<endl<<endl;
+  int triptype=10;
+  cin>>triptype;
+  while(triptype>2||triptype<0){
+    cout<<"Vous devez rentrer une valeur comprise entre 0 et 2."<<endl;
+    cin>>triptype;
+  }
+
+  cout<<"Souhaitez-vous spécifier une ville de départ ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
+  string startcity;
+  cin>>startcity;
+  cout<<"Souhaitez-vous spécifier une ville d'arrivée ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
+  string endcity;
+  cin>>endcity;
+
+  cout<<"Souhaitez-vous fixer une intervalle de trajet ?\n - 0, entrée, 0 si non \n - n, entrée, m si oui"<<endl<<endl;
+  int n;
+  int m;
+  cin>>n;
+  cin>>m;
   ifstream fic;
   fic.open(file);
 
   if(fic){
-    catalogue->LoadFromFile(fic);
+    catalogue->LoadFromFile(fic,triptype,startcity,endcity,n,m);
     fic.close();
   } else{
     cout<<"ERREUR : impossible d'ouvrir le fichier"<<endl;
@@ -57,7 +68,7 @@ void loadTest(Catalogue* catalogue){
   ifstream fic;
   fic.open("demo.txt");
   if(fic){
-    catalogue->LoadFromFile(fic);
+    catalogue->LoadFromFile(fic,0,"0","Monaco",0,0);
     fic.close();
   }
 }
@@ -66,10 +77,34 @@ void save(Catalogue* catalogue){
   cout<<"Dans quel fichier souhaitez-vous sauvegarder votre catalogue ?"<<endl;
   string file;
   cin>>file;
+
+  cout<<"Souhaitez-vous spécifier le type de trajet que vous voulez ?\n - 0 si non \n - 1 pour les trajets simples \n - 2 pour les trajets composés"<<endl<<endl;
+  int triptype=10;
+  cin>>triptype;
+  while(triptype>2||triptype<0){
+    cout<<"Vous devez rentrer une valeur comprise entre 0 et 2."<<endl;
+    cin>>triptype;
+  }
+
+  cout<<"Souhaitez-vous spécifier une ville de départ ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
+  string startcity;
+  cin>>startcity;
+  cout<<"Souhaitez-vous spécifier une ville d'arrivée ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
+  string endcity;
+  cin>>endcity;
+
+  cout<<"Souhaitez-vous fixer une intervalle de trajet ?\n - 0, entrée, 0 si non \n - n, entrée, m si oui"<<endl<<endl;
+  int n;
+  int m;
+  cin>>n;
+  cin>>m;
+
   ofstream fic;
   fic.open(file);
+
+
   if(fic){
-    catalogue->SaveInFile(fic);
+    catalogue->SaveInFile(fic,triptype,startcity,endcity);
     fic.close();
   }else{
     cout<<"ERREUR : impossible d'ouvrir le fichier"<<endl;

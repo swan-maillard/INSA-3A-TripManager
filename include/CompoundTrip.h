@@ -52,6 +52,8 @@ class CompoundTrip : public Trip {
 
     const string ToFileFormat() const;
 
+    const int GetType() const;
+
 
 //----------------------------------------------------------------- PRIVE
   protected:

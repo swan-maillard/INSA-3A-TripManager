@@ -41,6 +41,8 @@ class Trip {
     virtual const char* GetFinishCity() const = 0;
 
     virtual const string ToFileFormat() const = 0;
+
+    virtual const int GetType() const=0;
 };
 
 #endif // TRIP_H

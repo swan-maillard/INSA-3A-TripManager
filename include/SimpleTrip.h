@@ -51,6 +51,8 @@ class SimpleTrip : public Trip {
 
     const string ToFileFormat() const;
 
+    const int GetType() const;
+
 //----------------------------------------------------------------- PRIVE
   protected:
 //----------------------------------------------------- Attributs protégés
