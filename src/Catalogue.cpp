@@ -125,78 +125,104 @@ void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
   delete tripsIterator;
 }
 
-void Catalogue::LoadFromFile(ifstream & file, int type, string villedepart, string villearrivee, int n, int m) {
-  string ligne;
-  int nbTrips = 0;
-  bool isCompound = false;
+void Catalogue::LoadFromFile(ifstream & file, loadSaveSettings & settings) {
+  string line;
+  int tripIndex = 0;
+  bool isInCompound = false;
+  bool isInAllowedCompound = false;
   CompoundTrip * tc = NULL;
 
-
-  string departcompose;
-  string arriveecomposee;
-  while (getline(file, ligne)) {
+  // Pour chaque ligne
+  while (getline(file, line)) {
+    // On récupère le nombre de caractères
+    int lengthLine = line.length() - 1;
     char c;
-    string mots[3];
-    int index = 0;
 
-    for (int i=0; i<(int)ligne.length(); i++) {
-      c = ligne[i];
+    // On récupère les arguments de la ligne
+    string args[3];
+    int argIndex = 0;
+    for (int i=0; i<lengthLine; i++) {
+      c = line[i];
 
-      if (c == ';') {
-        index++;
+      if (c == ';')
+        argIndex++;
+      else
+        args[argIndex] += c;
+    }
+
+    // S'il n'y a pas d'arguments on passe à la ligne suivante
+    if (argIndex == 0)
+      continue;
+
+    if (args[0] == "COMPOUND") {
+      // Si le premier argument est "COMPOUND" alors on entre dans un trajet composé
+      // On vérifie alors que les paramètres comprennent les trajets composés
+      isInCompound = true;
+      isInAllowedCompound = false;
+
+      bool checkType = (settings.type == 0 || settings.type == 2);
+      bool checkStartCity = (settings.startCity == "0" || settings.startCity == args[1]);
+      bool checkFinishCity = (settings.finishCity == "0" || settings.finishCity == args[2]);
+      bool checkInterval = (settings.isInterval == 0 || (settings.minInterval <= tripIndex && settings.maxInterval >= tripIndex));
+      if (checkType && checkStartCity && checkFinishCity) {
+        if (checkInterval) {
+          tc = new CompoundTrip();
+          isInAllowedCompound = true;
+        }
+        tripIndex++;
+      }
+    }
+    else if (args[0] == "END_COMPOUND") {
+      // Si le premier argument est "END_COMPOUND" et que l'on est dans un trajet composé alors on en sort
+      isInCompound = false;
+      if (isInAllowedCompound) {
+        AddTrip(*tc);
+        delete tc;
+        tc = NULL;
+      }
+    }
+    else if (argIndex == 3 && args[0].length() > 0 && args[1].length() > 0 && args[2].length() > 0) {
+      // S'il y a trois arguments alors on est dans un trajet simple
+
+      SimpleTrip trip(args[0].c_str(), args[1].c_str(), args[2].c_str());
+
+      // Selon que le trajet simple fasse parti d'un trajet composé ou non
+      if (isInCompound) {
+        if (isInAllowedCompound)
+          tc->AddTrip(trip);
       }
       else {
-        mots[index] += c;
+        bool checkType = (settings.type == 0 || settings.type == 1);
+        bool checkStartCity = (settings.startCity == "0" || settings.startCity == args[0]);
+        bool checkFinishCity = (settings.finishCity == "0" || settings.finishCity == args[1]);
+        bool checkInterval = (settings.isInterval == 0 || (settings.minInterval <= tripIndex && settings.maxInterval >= tripIndex));
+
+        if (checkType && checkStartCity && checkFinishCity) {
+          if (checkInterval) AddTrip(trip);
+          tripIndex++;
+        }
       }
     }
-    if (mots[0].length() == 0)
-      continue;
 
-    if (mots[0] == "COMPOUND") {
-      isCompound = true;
-      nbTrips++;
-      tc = new CompoundTrip();
-      departcompose=mots[1];
-      arriveecomposee=mots[2];
-      continue;
-    }
-    else if (mots[0] == "END_COMPOUND") {
-      isCompound = false;
-      if(type!=1&& (villedepart=="0" || villedepart==departcompose) && (villearrivee=="0"||villearrivee==arriveecomposee)&&((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n))){ //partie sur n et m à enlever car ça marche pas
-      AddTrip(*tc);
-    }
-    departcompose="0";
-    arriveecomposee="0";
-      delete tc;
-      tc=NULL;
-      continue;
-    }
-
-    SimpleTrip trip(mots[0].c_str(), mots[1].c_str(), mots[2].c_str());
-    if (!isCompound) {
-      if(type!=2&& (villedepart=="0" || villedepart==mots[0]) && (villearrivee=="0"||villearrivee==mots[1])){
-        nbTrips++;
-        if(((n==0 && m==0)|| (nbTrips<=m && nbTrips>=n))) //partie sur n et m qui marche pas
-          AddTrip(trip);
-    }
-    }
-    else {
-      tc->AddTrip(trip);
-    }
   }
-  cout<<"nombre de trajets :" <<nbTrips; //problème dans le compteur de trajet?
-
 }
 
-void Catalogue::SaveInFile(ofstream & file, int type, string villedepart, string villearrivee) const {
+void Catalogue::SaveInFile(ofstream & file, loadSaveSettings & settings) const {
   if (tripList == NULL) return;
 
+  int tripIndex = 0;
   Iterator * tripsIterator = tripList->CreateIterator();
   const Trip * currentTrip;
 
   while ((currentTrip = tripsIterator->Next()) != NULL) {
-    if((type==0 || type==currentTrip->GetType())&&(villedepart=="0"||villedepart==currentTrip->GetStartCity())&&(villearrivee=="0"||villearrivee==currentTrip->GetFinishCity()))
-    file<<currentTrip->ToFileFormat();
+    bool checkType = (settings.type == 0 || (settings.type == 1 && currentTrip->GetClass() == "SimpleTrip") || (settings.type == 2 && currentTrip->GetClass() == "CompoundTrip"));
+    bool checkStartCity = (settings.startCity == "0" || settings.startCity == string(currentTrip->GetStartCity()));
+    bool checkFinishCity = (settings.finishCity == "0" || settings.finishCity == string(currentTrip->GetFinishCity()));
+    bool checkInterval = (settings.isInterval == 0 || (settings.minInterval <= tripIndex && settings.maxInterval >= tripIndex));
+    if (checkType && checkStartCity && checkFinishCity) {
+      if (checkInterval) file << currentTrip->ToFileFormat();
+      tripIndex++;
+    }
   }
 
   delete tripsIterator;

@@ -143,6 +143,6 @@ const string CompoundTrip::ToFileFormat() const{
   return tripFormated;
 }
 
-const int CompoundTrip::GetType() const{
-  return 2;
+const string CompoundTrip::GetClass() const{
+  return "CompoundTrip";
 }

@@ -28,88 +28,6 @@ using namespace std;
 #include "../include/CompoundTrip.h"
 
 
-void load(Catalogue* catalogue){
-  cout<<"Quel fichier voulez-vous lire ?"<<endl;
-  string file;
-  cin>>file;
-
-  cout<<"Souhaitez-vous spécifier le type de trajet que vous voulez ?\n - 0 si non \n - 1 pour les trajets simples \n - 2 pour les trajets composés"<<endl<<endl;
-  int triptype=10;
-  cin>>triptype;
-  while(triptype>2||triptype<0){
-    cout<<"Vous devez rentrer une valeur comprise entre 0 et 2."<<endl;
-    cin>>triptype;
-  }
-
-  cout<<"Souhaitez-vous spécifier une ville de départ ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
-  string startcity;
-  cin>>startcity;
-  cout<<"Souhaitez-vous spécifier une ville d'arrivée ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
-  string endcity;
-  cin>>endcity;
-
-  cout<<"Souhaitez-vous fixer une intervalle de trajet ?\n - 0, entrée, 0 si non \n - n, entrée, m si oui"<<endl<<endl;
-  int n;
-  int m;
-  cin>>n;
-  cin>>m;
-  ifstream fic;
-  fic.open(file);
-
-  if(fic){
-    catalogue->LoadFromFile(fic,triptype,startcity,endcity,n,m);
-    fic.close();
-  } else{
-    cout<<"ERREUR : impossible d'ouvrir le fichier"<<endl;
-  }
-}
-
-void loadTest(Catalogue* catalogue){
-  ifstream fic;
-  fic.open("demo.txt");
-  if(fic){
-    catalogue->LoadFromFile(fic,0,"0","Monaco",0,0);
-    fic.close();
-  }
-}
-
-void save(Catalogue* catalogue){
-  cout<<"Dans quel fichier souhaitez-vous sauvegarder votre catalogue ?"<<endl;
-  string file;
-  cin>>file;
-
-  cout<<"Souhaitez-vous spécifier le type de trajet que vous voulez ?\n - 0 si non \n - 1 pour les trajets simples \n - 2 pour les trajets composés"<<endl<<endl;
-  int triptype=10;
-  cin>>triptype;
-  while(triptype>2||triptype<0){
-    cout<<"Vous devez rentrer une valeur comprise entre 0 et 2."<<endl;
-    cin>>triptype;
-  }
-
-  cout<<"Souhaitez-vous spécifier une ville de départ ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
-  string startcity;
-  cin>>startcity;
-  cout<<"Souhaitez-vous spécifier une ville d'arrivée ?\n - 0 si non \n - la ville en question si oui"<<endl<<endl;
-  string endcity;
-  cin>>endcity;
-
-  cout<<"Souhaitez-vous fixer une intervalle de trajet ?\n - 0, entrée, 0 si non \n - n, entrée, m si oui"<<endl<<endl;
-  int n;
-  int m;
-  cin>>n;
-  cin>>m;
-
-  ofstream fic;
-  fic.open(file);
-
-
-  if(fic){
-    catalogue->SaveInFile(fic,triptype,startcity,endcity);
-    fic.close();
-  }else{
-    cout<<"ERREUR : impossible d'ouvrir le fichier"<<endl;
-  }
-}
 
 void displayMenu(Catalogue * catalogue);
 void displayCatalogue(Catalogue * catalogue);
@@ -117,6 +35,9 @@ void searchTrip(Catalogue * catalogue);
 void addTrip(Catalogue * catalogue);
 void addSimpleTrip(Catalogue * catalogue);
 void addCompoundTrip(Catalogue * catalogue);
+void load(Catalogue * catalogue);
+void save(Catalogue * catalogue);
+loadSaveSettings askForSettings();
 
 // Fonction principale
 int main() {
@@ -136,9 +57,9 @@ void displayMenu(Catalogue * catalogue) {
     cout << " 1 - Afficher les trajets" << endl;
     cout << " 2 - Rechercher un trajet" << endl;
     cout << " 3 - Ajouter un trajet" << endl;
-    cout << " 4 - Quitter" << endl;
-    cout << " 5 - Charger un fichier" <<endl;
-    cout << " 6 - Sauvegarder dans un fichier" <<endl;
+    cout << " 4 - Charger un fichier" <<endl;
+    cout << " 5 - Sauvegarder dans un fichier" <<endl;
+    cout << " 6 - Quitter" << endl;
     cin >> choice;
 
     cout << endl;
@@ -159,14 +80,14 @@ void displayMenu(Catalogue * catalogue) {
       case 3: // Ajout
         addTrip(catalogue);
         break;
-      case 4: // Fin
-        cout << "A bientôt dans notre grand catalogue !" << endl;
-        break;
-      case 5:
+      case 4: // Chargement du catalogue depuis un fichier
         load(catalogue);
         break;
-      case 6:
+      case 5: // Sauvegarde du catalogue dans un fichier
         save(catalogue);
+        break;
+      case 6: // Fin
+        cout << "A bientôt dans notre grand catalogue !" << endl;
         break;
       default: // Erreur de saisie
         cout << "Veuillez choisir une option parmi celles proposées !" << endl;
@@ -296,4 +217,132 @@ void addCompoundTrip(Catalogue * catalogue) {
     strcpy(startCity, finishCity);
   }
   catalogue->AddTrip(tc);
+}
+
+
+void load(Catalogue * catalogue) {
+  ifstream stream;
+  string file;
+  loadSaveSettings settings;
+
+  cout << "Quel fichier souhaitez-vous récupérer ?" << endl;
+  cin >> file;
+
+  stream.open(file);
+  if (!stream) {
+    cout << "ERREUR : Le fichier `" << file << "` est introuvable." << endl;
+    return;
+  }
+
+  settings = askForSettings();
+
+  catalogue->LoadFromFile(stream, settings);
+}
+
+void save(Catalogue* catalogue){
+  ofstream stream;
+  string file;
+  loadSaveSettings settings;
+
+  cout << "Dans quel fichier souhaitez-vous sauvegarder le catalogue ?" << endl;
+  cin >> file;
+
+  stream.open(file);
+  if (!stream) {
+    cout << "ERREUR : Le fichier `" << file << "` est introuvable." << endl;
+    return;
+  }
+
+  settings = askForSettings();
+
+  catalogue->SaveInFile(stream, settings);
+}
+
+loadSaveSettings askForSettings() {
+  loadSaveSettings settings;
+  bool error;
+
+  do {
+    error = false;
+
+    cout << "Souhaitez-vous préciser un type de trajet ?" << endl;
+    cout << " 0 : Non" << endl;
+    cout << " 1 : Trajets Simples seulement" << endl;
+    cout << " 2 : Trajets Composés seulement" << endl;
+    cin >> settings.type;
+
+    if (!cin || settings.type < 0 || settings.type > 2) {
+      error = true;
+      cout << "Le type de trajet ne peut prendre que les valeurs 0, 1 ou 2." << endl;
+
+      if (!cin) {
+        cin.clear();
+        cin.ignore();
+      }
+    }
+  } while (error);
+  
+
+  cout << "Souhaitez-vous préciser une ville de départ ? (0 si non)" << endl;
+  cin >> settings.startCity;
+
+  cout << "Souhaitez-vous préciser une ville d'arrivée ? (0 si non)" << endl;
+  cin >> settings.finishCity;
+
+  do {
+    error = false;
+    cout << "Souhaitez-vous préciser un intervalle de trajets à récupérer ?" << endl;
+    cout << " 0 : Non" << endl;
+    cout << " 1 : Oui" << endl;
+    cin >> settings.isInterval;
+
+    if (!cin || settings.isInterval < 0 || settings.isInterval > 1) {
+      error = true;
+      cout << "Les réponses attendues sont : 0 ou 1." << endl;
+
+      if (!cin) {
+        cin.clear();
+        cin.ignore();
+      }
+    }
+  } while (error);
+  
+
+  if (settings.isInterval) {
+
+    do {
+      error = false;
+      cout << "Indice du premier trajet à récupérer (les trajets sont comptés à partir de 0) :" << endl;
+      cin >> settings.minInterval;
+
+      if (!cin || settings.minInterval < 0) {
+        error = true;
+        cout << "L'indice du premier trajet à récupérer ne peut pas être inférieur à 0." << endl;
+
+        if (!cin) {
+          cin.clear();
+          cin.ignore();
+        }
+      }
+    } while (error);
+    
+    do {
+      error = false;
+      cout << "Indice du dernier trajet à récupérer (les trajets sont comptés à partir de 0) :" << endl;
+      cin >> settings.maxInterval;
+
+      if (!cin || settings.maxInterval < settings.minInterval) {
+        error = true;
+        cout << "L'indice du dernier trajet à récupérer ne peut pas être inférieur à celui du premier trajet." << endl;
+
+        if (!cin) {
+          cin.clear();
+          cin.ignore();
+        }
+      }
+
+    } while (error);
+  }
+
+  return settings;
 }

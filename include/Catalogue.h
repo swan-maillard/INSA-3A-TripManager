@@ -15,6 +15,15 @@
 #include "TripList.h"
 #include <fstream>
 
+struct loadSaveSettings {
+  int type = 0;
+  string startCity = "0";
+  string finishCity = "0";
+  int isInterval = 0;
+  int minInterval = 0;
+  int maxInterval = 0;
+};
+
 class Catalogue {
 
 //----------------------------------------------------------------- PUBLIC
@@ -40,9 +49,9 @@ class Catalogue {
     // Recherche un trajet avec le nom de la ville de départ et celle de fin
     void SearchTrip(const char * startCity, const char * finishCity);
 
-    void LoadFromFile(ifstream & file, int type, string villedepart, string villearrivee, int n, int m);
+    void LoadFromFile(ifstream & file, loadSaveSettings & settings);
 
-    void SaveInFile(ofstream & file, int type, string villedepart, string villearrivee) const;
+    void SaveInFile(ofstream & file, loadSaveSettings & settings) const;
 
 
 //----------------------------------------------------------------- PRIVE
