@@ -135,7 +135,7 @@ void Catalogue::LoadFromFile(ifstream & file, loadSaveSettings & settings) {
   // Pour chaque ligne
   while (getline(file, line)) {
     // On récupère le nombre de caractères
-    int lengthLine = line.length() - 1;
+    int lengthLine = line.length();
     char c;
 
     // On récupère les arguments de la ligne

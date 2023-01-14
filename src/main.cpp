@@ -95,7 +95,7 @@ void displayMenu(Catalogue * catalogue) {
 
     cout << endl;
 
-  } while (choice != 4);
+  } while (choice != 6);
 }
 
 // Affiche le contenu du catalogue
@@ -281,7 +281,7 @@ loadSaveSettings askForSettings() {
       }
     }
   } while (error);
-  
+
 
   cout << "Souhaitez-vous préciser une ville de départ ? (0 si non)" << endl;
   cin >> settings.startCity;
@@ -306,7 +306,7 @@ loadSaveSettings askForSettings() {
       }
     }
   } while (error);
-  
+
 
   if (settings.isInterval) {
 
@@ -325,7 +325,7 @@ loadSaveSettings askForSettings() {
         }
       }
     } while (error);
-    
+
     do {
       error = false;
       cout << "Indice du dernier trajet à récupérer (les trajets sont comptés à partir de 0) :" << endl;
