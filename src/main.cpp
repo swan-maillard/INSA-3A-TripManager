@@ -95,7 +95,7 @@ void displayMenu(Catalogue * catalogue) {
 
     cout << endl;
 
-  } while (choice != 4);
+  } while (choice != 6);
 }
 
 // Affiche le contenu du catalogue

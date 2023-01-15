@@ -49,8 +49,10 @@ class SimpleTrip : public Trip {
     // Renvoie la ville d'arrivée du trajet
     const char* GetFinishCity() const;
 
+    // Renvoie le trajet dans le bon format pour être sauvegardé dans un fichier
     const string ToFileFormat() const;
 
+    // Renvoie la classe du trajet simple
     const string GetClass() const;
 
 //----------------------------------------------------------------- PRIVE

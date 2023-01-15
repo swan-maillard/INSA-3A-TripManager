@@ -11,9 +11,12 @@
 #define CATALOGUE_H
 
 //---------------------------------------------------------------- INCLUDE
+
 //-------------------------------------------------------- Include système
-#include "TripList.h"
 #include <fstream>
+
+//-------------------------------------------------------- Include personnel
+#include "TripList.h"
 
 struct loadSaveSettings {
   int type = 0;
@@ -49,8 +52,10 @@ class Catalogue {
     // Recherche un trajet avec le nom de la ville de départ et celle de fin
     void SearchTrip(const char * startCity, const char * finishCity);
 
+    // Charge les trajets depuis un fichier dans le catalogue
     void LoadFromFile(ifstream & file, loadSaveSettings & settings);
 
+    // Sauvegarde les trajets du catalogue dans un fichier
     void SaveInFile(ofstream & file, loadSaveSettings & settings) const;
 
 

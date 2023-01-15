@@ -18,6 +18,7 @@ using namespace std;
 #include <cstring>
 #include <fstream>
 #include <string>
+#include <ctype.h>
 
 //------------------------------------------------------ Include personnel
 #include "../include/Catalogue.h"
@@ -57,7 +58,7 @@ void Catalogue::Display() const {
   Iterator * tripsIterator = tripList->CreateIterator();
   const Trip * currentTrip;
 
-  cout << "Notre catalogue propose " << GetTripsNumber() << " trajets :" << endl;
+  cout << "Notre catalogue propose " << GetTripsNumber() << " trajet" << (GetTripsNumber() > 1 ? "s" : "") << " :" << endl;
 
   while ((currentTrip = tripsIterator->Next()) != NULL) {
     cout << "- ";
@@ -126,23 +127,30 @@ void Catalogue::SearchTrip(const char * startCity, const char * finishCity) {
 }
 
 void Catalogue::LoadFromFile(ifstream & file, loadSaveSettings & settings) {
+  #ifdef MAP
+      cout << "Exécution de LoadFromFile de <Catalogue>" << endl;
+  #endif
+
   string line;
   int tripIndex = 0;
   bool isInCompound = false;
   bool isInAllowedCompound = false;
   CompoundTrip * tc = NULL;
 
-  // Pour chaque ligne
+  // Pour chaque ligne du fichier
   while (getline(file, line)) {
-    // On récupère le nombre de caractères
-    int lengthLine = line.length() - 1;
+    // On récupère le nombre de caractères de la ligne
+    int lengthLine = line.length();
     char c;
 
-    // On récupère les arguments de la ligne
+    // On récupère les arguments de la ligne (les arguments sont séparés par des `;`)
     string args[3];
     int argIndex = 0;
     for (int i=0; i<lengthLine; i++) {
       c = line[i];
+
+      if (!isprint(c))
+        break;
 
       if (c == ';')
         argIndex++;
@@ -156,10 +164,10 @@ void Catalogue::LoadFromFile(ifstream & file, loadSaveSettings & settings) {
 
     if (args[0] == "COMPOUND") {
       // Si le premier argument est "COMPOUND" alors on entre dans un trajet composé
-      // On vérifie alors que les paramètres comprennent les trajets composés
       isInCompound = true;
       isInAllowedCompound = false;
 
+      // On vérifie les différents critères
       bool checkType = (settings.type == 0 || settings.type == 2);
       bool checkStartCity = (settings.startCity == "0" || settings.startCity == args[1]);
       bool checkFinishCity = (settings.finishCity == "0" || settings.finishCity == args[2]);
@@ -184,21 +192,21 @@ void Catalogue::LoadFromFile(ifstream & file, loadSaveSettings & settings) {
     else if (argIndex == 3 && args[0].length() > 0 && args[1].length() > 0 && args[2].length() > 0) {
       // S'il y a trois arguments alors on est dans un trajet simple
 
-      SimpleTrip trip(args[0].c_str(), args[1].c_str(), args[2].c_str());
-
-      // Selon que le trajet simple fasse parti d'un trajet composé ou non
       if (isInCompound) {
+        // Si on est dans un trajet composé, on vérifie que ce trajet a vérifié les critères
         if (isInAllowedCompound)
-          tc->AddTrip(trip);
+          tc->AddTrip(SimpleTrip(args[0].c_str(), args[1].c_str(), args[2].c_str()));
       }
       else {
+        // On est dans un trajet simple
+        // On vérifie que le trajet respecte les critères
         bool checkType = (settings.type == 0 || settings.type == 1);
         bool checkStartCity = (settings.startCity == "0" || settings.startCity == args[0]);
         bool checkFinishCity = (settings.finishCity == "0" || settings.finishCity == args[1]);
         bool checkInterval = (settings.isInterval == 0 || (settings.minInterval <= tripIndex && settings.maxInterval >= tripIndex));
-
         if (checkType && checkStartCity && checkFinishCity) {
-          if (checkInterval) AddTrip(trip);
+          if (checkInterval) 
+            AddTrip(SimpleTrip(args[0].c_str(), args[1].c_str(), args[2].c_str()));
           tripIndex++;
         }
       }
@@ -208,13 +216,20 @@ void Catalogue::LoadFromFile(ifstream & file, loadSaveSettings & settings) {
 }
 
 void Catalogue::SaveInFile(ofstream & file, loadSaveSettings & settings) const {
+  #ifdef MAP
+      cout << "Exécution de SaveInFile de <Catalogue>" << endl;
+  #endif
+
+  // Si le catalogue est vide on sort de la méthode
   if (tripList == NULL) return;
 
+  // On itère sur les différents trajets
   int tripIndex = 0;
   Iterator * tripsIterator = tripList->CreateIterator();
   const Trip * currentTrip;
-
   while ((currentTrip = tripsIterator->Next()) != NULL) {
+
+    // Si le trajet valide les critères, on l'écrit dans le fichier
     bool checkType = (settings.type == 0 || (settings.type == 1 && currentTrip->GetClass() == "SimpleTrip") || (settings.type == 2 && currentTrip->GetClass() == "CompoundTrip"));
     bool checkStartCity = (settings.startCity == "0" || settings.startCity == string(currentTrip->GetStartCity()));
     bool checkFinishCity = (settings.finishCity == "0" || settings.finishCity == string(currentTrip->GetFinishCity()));

@@ -50,8 +50,10 @@ class CompoundTrip : public Trip {
     // Ajoute un trajet simple ou composé au trajet composé
     void AddTrip(const Trip & trip);
 
+    // Renvoie le trajet dans le bon format pour être sauvegardé dans un fichier
     const string ToFileFormat() const;
 
+    // Renvoie la classe du trajet composé
     const string GetClass() const;
 
 

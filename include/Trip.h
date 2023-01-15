@@ -40,8 +40,10 @@ class Trip {
     // Méthode abstraite
     virtual const char* GetFinishCity() const = 0;
 
+    // Renvoie le trajet dans le bon format pour être sauvegardé dans un fichier
     virtual const string ToFileFormat() const = 0;
 
+    // Renvoie la classe du trajet
     virtual const string GetClass() const = 0;
 };
 
