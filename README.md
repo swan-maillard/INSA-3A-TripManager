@@ -16,12 +16,12 @@
 
 1. **Cloner le projet** :
    ```bash
-   git clone https://github.com/swan-maillard/TP-3IF-TripManager.git
+   git clone https://github.com/swan-maillard/INSA-3A-TripManager.git
    ```
 
 2. **Accéder au répertoire du projet** :
    ```bash
-   cd TP-3IF-TripManager
+   cd INSA-3A-TripManager
    ```
 
 3. **Compiler le projet** :
@@ -66,8 +66,8 @@ Le projet inclut un Makefile pour simplifier la compilation et la gestion des fi
 
 ## Auteurs
 
+- **Swan Maillard** (maillard.swan@gmail.com)
 - **Sarah Malard** (sarah.malard@insa-lyon.fr)
-- **Swan Maillard** (swan.maillard@insa-lyon.fr)
 
 ## Licence
 
