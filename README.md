@@ -1,74 +1,74 @@
 # OUI-SNC++
 
-**OUI-SNC++** est une application console en C++ permettant de gérer un catalogue de trajets, qu'ils soient simples ou composés. Elle offre des fonctionnalités telles que l'affichage, la recherche, l'ajout, la sauvegarde et le chargement de trajets à partir de fichiers.
+**OUI-SNC++** is a console application in C++ that manages a catalog of routes, whether they are simple or composed. It offers features such as displaying, searching, adding, saving, and loading routes from files.
 
-## Fonctionnalités
+## Features
 
-- **Affichage des trajets** : Affiche tous les trajets actuellement enregistrés dans le catalogue.
-- **Recherche de trajets** : Permet de rechercher des trajets en fonction d'une ville de départ et d'une ville d'arrivée.
-- **Ajout de trajets** :
-  - **Trajet simple** : Trajet direct entre une ville de départ et une ville d'arrivée, via un moyen de transport.
-  - **Trajet composé** : Trajet constitué de plusieurs étapes successives (plusieurs trajets simples enchaînés).
-- **Sauvegarde du catalogue** : Sauvegarde les trajets dans un fichier avec des options pour filtrer par type de trajet et villes spécifiques.
-- **Chargement du catalogue** : Charge des trajets à partir d'un fichier avec des options de filtrage similaires à celles de la sauvegarde.
+- **Display Routes**: Shows all routes currently recorded in the catalog.
+- **Search for Routes**: Allows searching for routes based on a departure city and an arrival city.
+- **Add Routes**:
+  - **Simple Route**: A direct route between a departure city and an arrival city, via a mode of transportation.
+  - **Composed Route**: A route consisting of several successive stages (multiple simple routes chained together).
+- **Save Catalog**: Saves the routes to a file with options to filter by route type and specific cities.
+- **Load Catalog**: Loads routes from a file with similar filtering options to those of saving.
 
 ## Installation
 
-1. **Cloner le projet** :
+1. **Clone the project**:
    ```bash
    git clone https://github.com/swan-maillard/INSA-3A-TripManager.git
    ```
 
-2. **Accéder au répertoire du projet** :
+2. **Access the project directory**:
    ```bash
    cd INSA-3A-TripManager
    ```
 
-3. **Compiler le projet** :
+3. **Compile the project**:
    ```bash
    make
    ```
 
-4. **Lancer l'application** :
+4. **Launch the application**:
    ```bash
    ./trajets
    ```
 
-## Utilisation
+## Usage
 
-Une fois l'application lancée, un menu interactif vous permet de naviguer entre différentes options :
+Once the application is launched, an interactive menu allows you to navigate between different options:
 
-1. **Afficher les trajets** : Montre tous les trajets enregistrés dans le catalogue.
-2. **Rechercher un trajet** : Permet de rechercher un trajet en spécifiant la ville de départ et la ville d'arrivée.
-3. **Ajouter un trajet** :
-   - **Trajet simple** : Ajoutez un trajet direct en fournissant les informations de la ville de départ, de la ville d'arrivée, et du moyen de transport.
-   - **Trajet composé** : Ajoutez un trajet composé en spécifiant les différentes étapes (villes et moyens de transport).
-4. **Charger un fichier** : Charge des trajets à partir d'un fichier existant.
-5. **Sauvegarder dans un fichier** : Sauvegarde le catalogue actuel dans un fichier avec des options de filtrage (type de trajet, ville de départ, ville d'arrivée, etc.).
-6. **Quitter** : Quitte l'application.
+1. **Display Routes**: Shows all routes recorded in the catalog.
+2. **Search for a Route**: Allows you to search for a route by specifying the departure city and the arrival city.
+3. **Add a Route**:
+   - **Simple Route**: Add a direct route by providing the information for the departure city, arrival city, and mode of transportation.
+   - **Composed Route**: Add a composed route by specifying the different stages (cities and modes of transportation).
+4. **Load a File**: Loads routes from an existing file.
+5. **Save to a File**: Saves the current catalog to a file with filtering options (route type, departure city, arrival city, etc.).
+6. **Exit**: Exits the application.
 
-## Structure du projet
+## Project Structure
 
-- **src/** : Contient les fichiers source C++ (.cpp).
-- **include/** : Contient les fichiers d'en-tête (.h).
-- **Makefile** : Automatisation de la compilation et de la gestion du projet.
+- **src/**: Contains the C++ source files (.cpp).
+- **include/**: Contains the header files (.h).
+- **Makefile**: Automates the compilation and management of the project.
 
-## Commandes Makefile
+## Makefile Commands
 
-Le projet inclut un Makefile pour simplifier la compilation et la gestion des fichiers. Voici quelques commandes utiles :
+The project includes a Makefile to simplify compilation and file management. Here are some useful commands:
 
-- `make` : Compile le projet et génère l'exécutable.
-- `make dev` : Compile le projet en mode développement avec des options de débogage.
-- `make run` : Compile et exécute l'application.
-- `make clean` : Supprime les fichiers objets générés.
-- `make fclean` : Supprime les fichiers objets ainsi que l'exécutable.
-- `make info` : Affiche des informations sur la structure du projet.
+- `make`: Compiles the project and generates the executable.
+- `make dev`: Compiles the project in development mode with debugging options.
+- `make run`: Compiles and runs the application.
+- `make clean`: Removes generated object files.
+- `make fclean`: Removes object files as well as the executable.
+- `make info`: Displays information about the project structure.
 
-## Auteurs
+## Authors
 
 - **Swan Maillard** (maillard.swan@gmail.com)
 - **Sarah Malard** (sarah.malard@insa-lyon.fr)
 
-## Licence
+## License
 
-Ce projet est sous licence MIT. Consultez le fichier `LICENSE` pour plus d'informations.
+This project is licensed under the MIT License. Please refer to the `LICENSE` file for more information.
